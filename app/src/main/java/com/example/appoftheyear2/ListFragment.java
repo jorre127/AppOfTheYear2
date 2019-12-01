@@ -35,14 +35,8 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list,container,false  );
-    }
+        View view = inflater.inflate(R.layout.fragment_list,container,false  );
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mActivity.setContentView(R.layout.fragment_list);
         ListView listView = view.findViewById(R.id.ListView);
         String[] games = {"Monster Hunter: World", "Persona 5", "Pokemon Sword"};
         gameList = new ArrayList<>(Arrays.asList(games));
@@ -61,7 +55,7 @@ public class ListFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+        return view;
     }
-
 
 }
