@@ -1,8 +1,11 @@
 package com.example.appoftheyear2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 public class ListFragment extends Fragment {
 
@@ -39,19 +43,40 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
+        builder = new AlertDialog.Builder(mView.getContext());
         final ListView listView = view.findViewById(R.id.ListView);
         String[] games = {"Monster Hunter: World", "Persona 5", "Pokemon Sword"};
         gameList = new ArrayList<>(Arrays.asList(games));
         adapter = new ArrayAdapter<>(mActivity, R.layout.list_item, R.id.textItem, gameList);
         listView.setAdapter(adapter);
+
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView.getItemAtPosition(position);
-                gameList.remove(position);
-                adapter.notifyDataSetChanged();
+                final int listPos = position;
+
+                builder.setMessage("Are you sure you want to delete this item?")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                gameList.remove((listPos));
+                                adapter.notifyDataSetChanged();
+
+                                Toast.makeText(mView.getContext(),"Game Deleted From List!",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
+                AlertDialog alert = builder.create();
+                alert.setTitle("Warning");
+                alert.show();
                 return true;
             }
         });
