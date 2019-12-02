@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +27,7 @@ public class ListFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private EditText textInput;
     private Activity mActivity;
+    private View mView;
 
 
     @Override
@@ -35,13 +39,22 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list,container,false  );
-
-        ListView listView = view.findViewById(R.id.ListView);
+        final View view = inflater.inflate(R.layout.fragment_list,container,false  );
+        mView = view;
+        final ListView listView = view.findViewById(R.id.ListView);
         String[] games = {"Monster Hunter: World", "Persona 5", "Pokemon Sword"};
         gameList = new ArrayList<>(Arrays.asList(games));
         adapter = new ArrayAdapter<>(mActivity, R.layout.list_item, R.id.textItem, gameList);
         listView.setAdapter(adapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = listView.getItemAtPosition(position);
+                gameList.remove(position);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
         textInput = view.findViewById(R.id.ListAddInput);
         Button addButton = view.findViewById(R.id.AddButton);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -50,8 +63,13 @@ public class ListFragment extends Fragment {
                 String newGame = textInput.getText().toString();
                 if (!newGame.equals("")) {
                     gameList.add(newGame);
+                    Context context = mView.getContext();
+                    CharSequence text = "Game Added!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
-                ((EditText) v.findViewById(R.id.ListAddInput)).setText("");
+                ((EditText) mView.findViewById(R.id.ListAddInput)).setText("");
                 adapter.notifyDataSetChanged();
             }
         });
