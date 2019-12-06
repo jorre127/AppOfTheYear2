@@ -58,14 +58,13 @@ public class ListFragment extends Fragment {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Object listItem = listView.getItemAtPosition(position);
                 final int listPos = position;
 
                 builder.setMessage("Are you sure you want to delete this item?")
                         .setCancelable(true)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                gameList.remove((listPos));
+                                gameList.remove(listPos);
                                 adapter.notifyDataSetChanged();
 
                                 Toast.makeText(mView.getContext(),"Game Deleted From List!",
