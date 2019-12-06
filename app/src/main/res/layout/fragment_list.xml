@@ -22,19 +22,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/ListAddInput"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            style="@style/MyEditTextStyle"
+            android:layout_width="87dp"
+            android:layout_height="44dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:hint="@string/gameInputText"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:hint="@string/gameInputText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/AddGameHeader"
-            tools:ignore="LabelFor"
-            style="@style/MyEditTextStyle"/>
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/genreAddInput"
+            style="@style/MyEditTextStyle"
+            android:layout_width="87dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/gameInputText"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            app:layout_constraintStart_toEndOf="@+id/ListAddInput"
+            app:layout_constraintTop_toBottomOf="@+id/AddGameHeader"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/AddButton"
@@ -43,21 +58,40 @@
             android:layout_marginTop="8dp"
             android:text="@string/addButtonText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
-            app:layout_constraintStart_toEndOf="@+id/ListAddInput"
+            app:layout_constraintStart_toEndOf="@+id/genreAddInput"
             app:layout_constraintTop_toBottomOf="@+id/AddGameHeader" />
 
         <ListView
             android:id="@+id/ListView"
             style="@android:style/Widget.DeviceDefault.Light.ListView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="224dp"
+            android:layout_height="617dp"
             android:layout_marginTop="8dp"
             android:background="#00B42C2C"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ListAddInput" />
+            app:layout_constraintTop_toBottomOf="@+id/ListAddInput"
+            android:dividerHeight="0dp"
+            android:divider="@null"/>
+
+        <ListView
+            android:id="@+id/GenreListView"
+            android:layout_width="145dp"
+            android:layout_height="622dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.619"
+            app:layout_constraintStart_toEndOf="@+id/ListView"
+            app:layout_constraintTop_toBottomOf="@+id/ListAddInput"
+            android:dividerHeight="0dp"
+            android:divider="@null"/>
+
+        <Button
+            android:id="@+id/ActivityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ActivityButtonText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
