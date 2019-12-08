@@ -6,4 +6,5 @@
     <string name="addButtonText">addButtonText</string>
     <string name="gameInputText">gameInputText</string>
     <string name="GameAddHeaderText">GameHeaderText</string>
+    <string name="darkmode_string">Darkmode</string>
 </resources>
