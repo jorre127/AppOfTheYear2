@@ -36,6 +36,7 @@ public class Addgame extends AppCompatActivity {
                     returnIntent.putExtra("nameInput", nameInput.getText().toString());
                     returnIntent.putExtra("genreInput", genreInput.getText().toString());
                     setResult(Activity.RESULT_OK, returnIntent);
+
                     finish();
                 }
                 else {

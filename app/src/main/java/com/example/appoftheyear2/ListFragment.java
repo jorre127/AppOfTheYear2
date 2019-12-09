@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,18 +38,20 @@ import java.util.Arrays;
 public class ListFragment extends Fragment {
 
     private ArrayList<Game> gameList =  new ArrayList<>();
-    private ArrayAdapter<Game> gameAdapter;
+
     private Activity mActivity;
     private View mView;
     private RecyclerView gameRecyclerView;
     private RecyclerView.Adapter gameRecycleAdapter;
     private RecyclerView.LayoutManager gameLayourManager;
+    private ArrayAdapter<Game> gameAdapter;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -57,16 +60,15 @@ public class ListFragment extends Fragment {
             if(resultCode == Activity.RESULT_OK){
                 Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), 7);
                 gameList.add(newGame);
-                gameAdapter.notifyDataSetChanged();
                 saveData();
-                loadData();
                 Toast.makeText(mView.getContext(),"Game Added!", Toast.LENGTH_LONG).show();
+                gameAdapter.notifyDataSetChanged();
             }
         }
     }
 
     private void saveData(){
-        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", mActivity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(gameList);
@@ -75,7 +77,7 @@ public class ListFragment extends Fragment {
     }
 
     private void loadData(){
-        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", mActivity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("gameList", null);
         Type type = new TypeToken<ArrayList<Game>>() {}.getType();
@@ -88,22 +90,24 @@ public class ListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         gameRecyclerView = view.findViewById(R.id.RecyclerViewOfGame);
-        gameRecyclerView.setHasFixedSize(true);
         gameLayourManager = new LinearLayoutManager(mView.getContext());
         gameRecycleAdapter = new gameAdapter(gameList);
 
         gameRecyclerView.setLayoutManager(gameLayourManager);
         gameRecyclerView.setAdapter(gameRecycleAdapter);
+        gameAdapter.notifyDataSetChanged();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        loadData();
         final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
+        gameAdapter  = new ArrayAdapter<>(mActivity, R.layout.game_item, R.id.gameName, gameList);
+
         builder = new AlertDialog.Builder(mView.getContext());
-        gameAdapter = new ArrayAdapter<>(mActivity, R.layout.game_item, R.id.gameName, gameList);
 
         Button activityButton = view.findViewById(R.id.ActivityButton);
         activityButton.setOnClickListener(new View.OnClickListener(){
@@ -112,7 +116,6 @@ public class ListFragment extends Fragment {
                 startActivityForResult(new Intent(getContext(), Addgame.class),1);
             }
         });
-        loadData();
         return view;
     }
 
