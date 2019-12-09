@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,23 +22,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class ListFragment extends Fragment {
 
-    private ArrayList<String> gameList;
-    private ArrayList<String> genreList;
-    private ArrayAdapter<String> gameAdapter;
-    private ArrayAdapter<String> genreAdapter;
-    private EditText textInput;
-    private EditText genreInput;
+    private ArrayList<Game> gameList =  new ArrayList<>();
+    private ArrayAdapter<Game> gameAdapter;
     private Activity mActivity;
     private View mView;
-
+    private RecyclerView gameRecyclerView;
+    private RecyclerView.Adapter gameRecycleAdapter;
+    private RecyclerView.LayoutManager gameLayourManager;
 
     @Override
     public void onAttach(Activity activity) {
@@ -45,87 +50,69 @@ public class ListFragment extends Fragment {
         mActivity = activity;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), 7);
+                gameList.add(newGame);
+                gameAdapter.notifyDataSetChanged();
+                saveData();
+                loadData();
+                Toast.makeText(mView.getContext(),"Game Added!", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void saveData(){
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", mActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(gameList);
+        editor.putString("gameList", json);
+        editor.apply();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", mActivity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("gameList", null);
+        Type type = new TypeToken<ArrayList<Game>>() {}.getType();
+        gameList = gson.fromJson(json, type);
+
+        if (gameList == null){
+            gameList = new ArrayList<>();
+        }
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        gameRecyclerView = view.findViewById(R.id.RecyclerViewOfGame);
+        gameRecyclerView.setHasFixedSize(true);
+        gameLayourManager = new LinearLayoutManager(mView.getContext());
+        gameRecycleAdapter = new gameAdapter(gameList);
+
+        gameRecyclerView.setLayoutManager(gameLayourManager);
+        gameRecyclerView.setAdapter(gameRecycleAdapter);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
         builder = new AlertDialog.Builder(mView.getContext());
-        final ListView listView = view.findViewById(R.id.ListView);
-        final ListView genreListView = view.findViewById(R.id.GenreListView);
-        String[] games = {"Monster Hunter: World", "Persona 5", "Pokemon Sword"};
-        String[] genres = {"Action", "JRPG", "JRPG"};
-        genreList = new ArrayList<>(Arrays.asList(genres));
-        gameList = new ArrayList<>(Arrays.asList(games));
-        gameAdapter = new ArrayAdapter<>(mActivity, R.layout.list_item, R.id.textItem, gameList);
-        genreAdapter = new ArrayAdapter<>(mActivity, R.layout.genre_item, R.id.genreItem, genreList);
-        listView.setAdapter(gameAdapter);
-        genreListView.setAdapter(genreAdapter);
+        gameAdapter = new ArrayAdapter<>(mActivity, R.layout.game_item, R.id.gameName, gameList);
 
-
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int listPos = position;
-
-                builder.setMessage("Are you sure you want to delete this item?")
-                        .setCancelable(true)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                gameList.remove(listPos);
-                                genreList.remove(listPos);
-                                gameAdapter.notifyDataSetChanged();
-                                genreAdapter.notifyDataSetChanged();
-
-                                Toast.makeText(mView.getContext(),"Game Deleted From List!",
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        });
-
-
-                AlertDialog alert = builder.create();
-                alert.setTitle("Warning");
-                alert.show();
-                return true;
-            }
-        });
-        textInput = view.findViewById(R.id.ListAddInput);
-        genreInput = view.findViewById(R.id.genreAddInput);
         Button activityButton = view.findViewById(R.id.ActivityButton);
         activityButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(getContext(), Addgame.class));
+                startActivityForResult(new Intent(getContext(), Addgame.class),1);
             }
         });
-        Button addButton = view.findViewById(R.id.AddButton);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newGame = mActivity.getIntent().getStringExtra("nameInput");
-                String newGenre = mActivity.getIntent().getStringExtra("genreInput");
-                if (!newGame.equals("") && !newGenre.equals("")) {
-                    gameList.add(newGame);
-                    genreList.add(newGenre);
-                    Context context = mView.getContext();
-                    CharSequence text = "Game Added!";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    ((EditText) mView.findViewById(R.id.ListAddInput)).setText("");
-                    ((EditText) mView.findViewById(R.id.genreAddInput)).setText("");
-                }
-                else{
-                    Toast toast = Toast.makeText(mView.getContext(), "Fill Out All Fields!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                gameAdapter.notifyDataSetChanged();
-                genreAdapter.notifyDataSetChanged();
-            }
-        });
+        loadData();
         return view;
     }
 
