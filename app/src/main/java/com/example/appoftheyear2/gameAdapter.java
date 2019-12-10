@@ -1,11 +1,14 @@
 package com.example.appoftheyear2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,7 +25,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
     public static class gameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView gameNameView;
         public TextView gameGenreView;
-        public Button deleteButtton;
+        public ImageButton deleteButtton;
         final gameAdapter mAdapter;
         ArrayList<Game> gameListt;
         Context mContext;
@@ -78,8 +81,19 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                 holder.deleteButtton.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        gameList.remove(position);
-                        notifyDataSetChanged();
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Deleting This Game");
+                        builder.setMessage("Are you sure you want to delete this game from your list?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                gameList.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        });
+                        builder.setNegativeButton("No", null);
+                        builder.setIcon(android.R.drawable.ic_delete);
+                        builder.show();
                     }
                 });
             }
