@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Addgame">
+    tools:context=".Addgame"
+    android:background="?attr/backgroundcolor">
 
     <EditText
         android:id="@+id/editGameName"
@@ -14,6 +15,7 @@
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="@string/GameNameAddHint"
+        android:textColor="?attr/textcolor"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +27,7 @@
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="@string/GenreAddHint"
+        android:textColor="?attr/textcolor"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editGameName" />
@@ -36,6 +39,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/GameNameText"
+        android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +50,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/GenreAddText"
+        android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GameNameText" />
 
@@ -55,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:text="@string/AddGameButtonText"
+        android:textColor="?attr/textcolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -67,6 +73,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:text="@string/scoreText"
+        android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genreText" />
 
@@ -80,5 +87,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editGenre"
         android:hint="@string/scoreInputText"
+        android:textColor="?attr/textcolor"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

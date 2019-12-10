@@ -12,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        android:background="?attr/backgroundcolor">
 
         <TextView
             android:id="@+id/gameName"
@@ -22,9 +23,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="line 1"
-            android:textColor="#000000"
+            android:textColor="?attr/textcolor"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:background="?attr/backgroundcolor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +40,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="line 1"
-            android:textColor="#000000"
+            android:textColor="?attr/textcolor"
             android:textSize="15sp"
+            android:background="?attr/backgroundcolor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button"
+            android:textColor="?attr/textcolor"
+            android:background="?attr/backgroundcolor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/genre"
