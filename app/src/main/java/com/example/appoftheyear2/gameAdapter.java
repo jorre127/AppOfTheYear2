@@ -14,6 +14,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
 
     private ArrayList<Game> gameList;
 
+
     public static class gameViewHolder extends RecyclerView.ViewHolder{
         public TextView gameNameView;
         public TextView gameGenreView;
@@ -40,10 +41,12 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull gameViewHolder holder, int position) {
-        Game currentGame = gameList.get(position);
+        final Game currentGame = gameList.get(position);
 
-        holder.gameNameView.setText(currentGame.getName());
-        holder.gameGenreView.setText(currentGame.getGenre());
+        if (currentGame != null) {
+            holder.gameNameView.setText(currentGame.getName());
+            holder.gameGenreView.setText(currentGame.getGenre());
+        }
     }
 
     @Override
