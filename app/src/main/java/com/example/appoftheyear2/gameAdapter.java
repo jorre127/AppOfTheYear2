@@ -38,11 +38,14 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         @Override
         public void onClick(View v) {
             int mPosition = getLayoutPosition();
-            Game element = new Game("Aangepast", "Item", 0);
-            this.gameListt.set(mPosition, element);
-            mAdapter.notifyDataSetChanged();
-            mContext.startActivity(new Intent(mContext, Addgame.class));
+            Intent i = new Intent(mContext, Gamedetails.class);
+            Game currentGame = gameListt.get(mPosition);
+            i.putExtra("currentGameName", currentGame.Name);
+            i.putExtra("currentGameGenre", currentGame.Genre);
+            i.putExtra("currentGameScore", currentGame.Score);
+            mContext.startActivity(i);
         }
+
     }
 
     @NonNull

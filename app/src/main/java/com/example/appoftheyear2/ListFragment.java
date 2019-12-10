@@ -59,7 +59,7 @@ public class ListFragment extends Fragment {
 
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), 7);
+                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")));
                 gameList.add(newGame);
                 saveData();
                 Toast.makeText(mView.getContext(),"Game Added!", Toast.LENGTH_LONG).show();

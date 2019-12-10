@@ -17,6 +17,7 @@ public class Addgame extends AppCompatActivity {
     private Button addGameButon;
     private EditText nameInput;
     private EditText genreInput;
+    private EditText scoreInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class Addgame extends AppCompatActivity {
         addGameButon = findViewById(R.id.addGameButton);
         nameInput = findViewById(R.id.editGameName);
         genreInput = findViewById(R.id.editGenre);
+        scoreInput = findViewById(R.id.ScoreEdit);
 
 
         addGameButon.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +37,7 @@ public class Addgame extends AppCompatActivity {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("nameInput", nameInput.getText().toString());
                     returnIntent.putExtra("genreInput", genreInput.getText().toString());
+                    returnIntent.putExtra("scoreInput", scoreInput.getText().toString());
                     setResult(Activity.RESULT_OK, returnIntent);
 
                     finish();
