@@ -18,7 +18,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="50dp"
         android:text="DarkMode"
-        android:textColor="#0A0101"
+        android:textColor="?attr/textcolor"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/darkmode_switch"
