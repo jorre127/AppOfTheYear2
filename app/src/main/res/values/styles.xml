@@ -13,6 +13,9 @@
         <item name="tintcolor">#4B4141</item>
         <item name="buttoncolor">#FF0000</item>
 
+        <item name = "windowActionBar">false</item>
+        <item name ="windowNoTitle">true</item>
+
         <item name="android:windowAnimationStyle">@style/WindowsAnimationTransition</item>
     </style>
 
@@ -28,6 +31,9 @@
         <item name="textcolor">#FFFEFE</item>
         <item name="tintcolor">#FFFEFE</item>
         <item name="buttoncolor">#FF0000</item>
+
+        <item name = "windowActionBar">false</item>
+        <item name ="windowNoTitle">true</item>
 
         <item name="android:windowAnimationStyle">@style/WindowsAnimationTransition</item>
     </style>

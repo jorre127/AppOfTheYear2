@@ -24,6 +24,7 @@ public class SettingsFragment extends Fragment {
     DayNightSwitch dayNightSwitch;
     View background_view;
     Activity activity;
+    public static boolean Darkmode = false;
 
     @Nullable
     @Override
@@ -32,10 +33,10 @@ public class SettingsFragment extends Fragment {
         activity = getActivity();
 
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
-            getContext().getTheme().applyStyle(R.style.DarkTheme,true );
+            Darkmode = false;
         }
         else{
-            getContext().getTheme().applyStyle(R.style.AppTheme,true );
+           Darkmode = true;
         }
 
         //DarkMode
