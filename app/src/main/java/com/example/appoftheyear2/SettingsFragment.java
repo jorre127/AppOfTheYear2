@@ -7,16 +7,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchListener;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 
 public class SettingsFragment extends Fragment {
@@ -26,12 +30,17 @@ public class SettingsFragment extends Fragment {
     Activity activity;
     public static boolean Darkmode = false;
 
+    ConstraintLayout constraintLayout;
+    Button button;
+    int DefaultColor;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view =  inflater.inflate(R.layout.fragment_settings,container,false  );
         activity = getActivity();
 
+        //DarkMode
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
             Darkmode = false;
         }
@@ -39,7 +48,6 @@ public class SettingsFragment extends Fragment {
            Darkmode = true;
         }
 
-        //DarkMode
         dayNightSwitch = view.findViewById(R.id.darkmode_switch);
         background_view = view.findViewById(R.id.background_view);
 
@@ -64,10 +72,37 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
+
+        // Button for accent color picker
+        constraintLayout = view.findViewById(R.id.settingsLayout);
+        button = view.findViewById(R.id.btnChoose);
+        DefaultColor = ContextCompat.getColor(activity,R.color.colorPrimary);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenColorPicker(false);
+            }
+        });
+
         return view;
     }
 
     public void restartApp(){
         activity.recreate();
+    }
+    private void OpenColorPicker (boolean AlphaSupport){
+        AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(activity, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                Toast.makeText(activity, "Color Picker Closed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                DefaultColor = color;
+            }
+        });
+        ambilWarnaDialog.show();
     }
 }
