@@ -63,7 +63,7 @@ public class ListFragment extends Fragment {
                 gameList.add(newGame);
                 saveData();
                 Toast.makeText(mView.getContext(),"Game Added!", Toast.LENGTH_LONG).show();
-                gameAdapter.notifyDataSetChanged();
+                gameRecycleAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -119,4 +119,9 @@ public class ListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        saveData();
+    }
 }

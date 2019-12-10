@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
     public static class gameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView gameNameView;
         public TextView gameGenreView;
+        public Button deleteButtton;
         final gameAdapter mAdapter;
         ArrayList<Game> gameListt;
         Context mContext;
@@ -29,6 +31,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             super(itemView);
             gameNameView = itemView.findViewById(R.id.gameName);
             gameGenreView = itemView.findViewById(R.id.genre);
+            deleteButtton = itemView.findViewById(R.id.deleteButton);
             this.mAdapter = gameAdapterIn;
             gameListt = mAdapter.gameList;
             mContext = mContextIn;
@@ -44,6 +47,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             i.putExtra("currentGameGenre", currentGame.Genre);
             i.putExtra("currentGameScore", currentGame.Score);
             mContext.startActivity(i);
+
         }
 
     }
@@ -63,12 +67,22 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull gameViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull gameViewHolder holder, final int position) {
         final Game currentGame = gameList.get(position);
 
         if (currentGame != null) {
             holder.gameNameView.setText(currentGame.getName());
             holder.gameGenreView.setText(currentGame.getGenre());
+
+            if (holder.deleteButtton != null) {
+                holder.deleteButtton.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        gameList.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+            }
         }
 
     }
