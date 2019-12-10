@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">AppOfTheYear2</string>
-    
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="addButtonText">addButtonText</string>
-    <string name="gameInputText">gameInputText</string>
-    <string name="GameAddHeaderText">GameHeaderText</string>
+    <string name="addButtonText">Add Game</string>
+    <string name="gameInputText">Enter name of game*</string>
+    <string name="GameAddHeaderText">Add A Game Below!</string>
+    <string name="GameNameAddHint">Enter name of game here*</string>
+    <string name="GenreAddHint">Enter genre of game here</string>
+    <string name="GameNameText">Name of game:</string>
+    <string name="GenreAddText">Genre:</string>
+    <string name="AddGameButtonText">Add Game!</string>
+    <string name="ActivityButtonText">Button</string>
+    <string name="scoreText">Score:</string>
+    <string name="scoreInputText">Enter Score Here*</string>
+    <string name="GameNameColumnText">Name</string>
+    <string name="GameGenreColumnText">Genre:</string>
     <string name="darkmode_string">Darkmode</string>
 </resources>
