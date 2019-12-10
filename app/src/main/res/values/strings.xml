@@ -16,8 +16,5 @@
     <string name="scoreInputText">Enter Score Here*</string>
     <string name="GameNameColumnText">Name</string>
     <string name="GameGenreColumnText">Genre:</string>
-    <string name="addButtonText">addButtonText</string>
-    <string name="gameInputText">gameInputText</string>
-    <string name="GameAddHeaderText">GameHeaderText</string>
     <string name="darkmode_string">Darkmode</string>
 </resources>
