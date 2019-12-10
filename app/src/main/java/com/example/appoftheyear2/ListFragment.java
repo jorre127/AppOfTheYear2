@@ -96,7 +96,6 @@ public class ListFragment extends Fragment {
 
         gameRecyclerView.setLayoutManager(gameLayourManager);
         gameRecyclerView.setAdapter(gameRecycleAdapter);
-        gameAdapter.notifyDataSetChanged();
     }
 
     @Nullable
