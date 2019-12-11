@@ -20,8 +20,9 @@
         android:text="TextView"
         android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/GameNameDetails"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/GameDetailsStyle"/>
 
     <TextView
         android:id="@+id/GenreDetail"
@@ -31,8 +32,10 @@
         android:text="TextView"
         android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GameNameDetail" />
+        app:layout_constraintStart_toEndOf="@+id/GenreDetails"
+        app:layout_constraintTop_toBottomOf="@+id/GameNameDetail"
+        style="@style/GameDetailsStyle"/>
+
 
     <TextView
         android:id="@+id/ScoreDetail"
@@ -42,7 +45,44 @@
         android:text="TextView"
         android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ScoreDetails"
+        app:layout_constraintTop_toBottomOf="@+id/GenreDetail"
+        style="@style/GameDetailsStyle"/>
+
+
+    <TextView
+        android:id="@+id/GameNameDetails"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/GameNameColumnText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GenreDetail" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/GameDetailsStyle"/>
+
+    <TextView
+        android:id="@+id/GenreDetails"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/GameGenreColumnText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GameNameDetails"
+        style="@style/GameDetailsStyle"/>
+
+
+    <TextView
+        android:id="@+id/ScoreDetails"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/scoreText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GenreDetails"
+        style="@style/GameDetailsStyle"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

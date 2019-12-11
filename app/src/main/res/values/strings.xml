@@ -14,7 +14,7 @@
     <string name="ActivityButtonText">Button</string>
     <string name="scoreText">Score:</string>
     <string name="scoreInputText">Enter Score Here*</string>
-    <string name="GameNameColumnText">Name</string>
+    <string name="GameNameColumnText">Name:</string>
     <string name="GameGenreColumnText">Genre:</string>
     <string name="darkmode_string">Darkmode</string>
 </resources>

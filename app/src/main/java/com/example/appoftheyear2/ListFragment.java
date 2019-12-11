@@ -63,6 +63,7 @@ public class ListFragment extends Fragment {
                 Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")));
                 gameList.add(newGame);
                 saveData();
+
                 Toast.makeText(mView.getContext(),"Game Added!", Toast.LENGTH_LONG).show();
                 gameRecycleAdapter.notifyDataSetChanged();
             }
@@ -103,6 +104,7 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loadData();
+
         final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
