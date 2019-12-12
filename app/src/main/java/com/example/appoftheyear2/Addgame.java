@@ -19,9 +19,18 @@ public class Addgame extends AppCompatActivity {
     private EditText genreInput;
     private EditText scoreInput;
 
+    private SettingsFragment settingsFragment = new SettingsFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (SettingsFragment.Darkmode) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
+
         setContentView(R.layout.activity_addgame);
 
         addGameButon = findViewById(R.id.addGameButton);
