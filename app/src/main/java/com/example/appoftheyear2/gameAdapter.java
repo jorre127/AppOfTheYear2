@@ -1,28 +1,44 @@
 package com.example.appoftheyear2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder> {
+public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder> implements Dialog.DialogListener {
 
     public ArrayList<Game> gameList;
-    Context context;
+    public Context context;
+    int position;
 
-    public static class gameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    @Override
+    public void ApplyNewGame(Game editedGame) {
+        gameList.remove(position);
+        gameList.add(editedGame);
+        notifyDataSetChanged();
+    }
+
+    public static class gameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView gameNameView;
         public TextView gameGenreView;
-        public Button deleteButtton;
+        public ImageButton deleteButtton;
+        public ImageButton editButton;
         final gameAdapter mAdapter;
         ArrayList<Game> gameListt;
         Context mContext;
@@ -32,11 +48,13 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             gameNameView = itemView.findViewById(R.id.gameName);
             gameGenreView = itemView.findViewById(R.id.genre);
             deleteButtton = itemView.findViewById(R.id.deleteButton);
+            editButton = itemView.findViewById(R.id.editButton);
             this.mAdapter = gameAdapterIn;
             gameListt = mAdapter.gameList;
             mContext = mContextIn;
             itemView.setOnClickListener(this);
         }
+
 
         @Override
         public void onClick(View v) {
@@ -49,7 +67,6 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             mContext.startActivity(i);
 
         }
-
     }
 
     @NonNull
@@ -69,6 +86,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
     @Override
     public void onBindViewHolder(@NonNull gameViewHolder holder, final int position) {
         final Game currentGame = gameList.get(position);
+        this.position = position;
 
         if (currentGame != null) {
             holder.gameNameView.setText(currentGame.getName());
@@ -78,14 +96,42 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                 holder.deleteButtton.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        gameList.remove(position);
-                        notifyDataSetChanged();
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Deleting This Game");
+                        builder.setMessage("Are you sure you want to delete this game from your list?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                gameList.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        });
+                        builder.setNegativeButton("No", null);
+                        builder.show();
                     }
                 });
             }
+            if (holder.editButton != null){
+                holder.editButton.setOnClickListener(new View.OnClickListener() {
+                    Dialog dialog;
+                    @Override
+                    public void onClick(View v) {
+                        dialog = new Dialog();
+                        dialog.show(((FragmentActivity)context).getSupportFragmentManager(), "dialogEdit");
+                        if (dialog.editedGame!=null) {
+                            gameList.set(position, dialog.editedGame);
+                        }
+                    }
+                });
+
+
+            }
         }
 
+
     }
+
+
 
     @Override
     public int getItemCount() {

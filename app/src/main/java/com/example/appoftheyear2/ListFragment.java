@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +63,7 @@ public class ListFragment extends Fragment {
                 Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")));
                 gameList.add(newGame);
                 saveData();
+
                 Toast.makeText(mView.getContext(),"Game Added!", Toast.LENGTH_LONG).show();
                 gameRecycleAdapter.notifyDataSetChanged();
             }
@@ -102,6 +104,7 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loadData();
+
         final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
@@ -109,7 +112,7 @@ public class ListFragment extends Fragment {
 
         builder = new AlertDialog.Builder(mView.getContext());
 
-        Button activityButton = view.findViewById(R.id.ActivityButton);
+        ImageButton activityButton = view.findViewById(R.id.ActivityButton);
         activityButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

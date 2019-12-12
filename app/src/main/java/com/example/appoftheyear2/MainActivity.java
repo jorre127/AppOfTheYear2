@@ -31,7 +31,7 @@ import java.util.Set;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Dialog.DialogListener {
 
     private DrawerLayout drawer;
     private SettingsFragment settingsFragment = new SettingsFragment();
@@ -133,5 +133,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void ApplyNewGame(Game editedGame) {
+
     }
 }
