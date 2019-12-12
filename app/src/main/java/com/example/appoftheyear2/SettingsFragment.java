@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,10 +31,10 @@ public class SettingsFragment extends Fragment {
     View background_view;
     Activity activity;
     public static boolean Darkmode = false;
+    public static boolean recreate = false;
 
-    ConstraintLayout constraintLayout;
     Button button;
-    int DefaultColor;
+    public static int DefaultColor = 0;
 
     @Nullable
     @Override
@@ -42,10 +44,10 @@ public class SettingsFragment extends Fragment {
 
         //DarkMode
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
-            Darkmode = false;
+            Darkmode = true;
         }
         else{
-           Darkmode = true;
+           Darkmode = false;
         }
 
         dayNightSwitch = view.findViewById(R.id.darkmode_switch);
@@ -62,21 +64,21 @@ public class SettingsFragment extends Fragment {
                 if(is_night){
                     Toast.makeText(activity, "DarkMode On", Toast.LENGTH_SHORT).show();
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    Darkmode = true;
                     restartApp();
 
                 }
                 else{
                     Toast.makeText(activity, "DarkMode Off", Toast.LENGTH_SHORT).show();
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    Darkmode = false;
                     restartApp();
                 }
             }
         });
 
         // Button for accent color picker
-        constraintLayout = view.findViewById(R.id.settingsLayout);
         button = view.findViewById(R.id.btnChoose);
-        DefaultColor = ContextCompat.getColor(activity,R.color.colorPrimary);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +103,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 DefaultColor = color;
+                restartApp();
             }
         });
         ambilWarnaDialog.show();

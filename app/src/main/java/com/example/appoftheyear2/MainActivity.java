@@ -10,10 +10,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +27,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchListener;
 
+import java.util.Set;
+
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,22 +36,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private SettingsFragment settingsFragment = new SettingsFragment();
 
-    View constraintLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Enables Darkmode
-        if (SettingsFragment.Darkmode) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
-
         super.onCreate(savedInstanceState);
+
+            if (SettingsFragment.Darkmode) {
+                setTheme(R.style.DarkTheme);
+            } else {
+                setTheme(R.style.AppTheme);
+            }
+
         setContentView(R.layout.activity_main);
         // Slide over menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(settingsFragment!=null && settingsFragment.DefaultColor!=0)
+        toolbar.setBackgroundColor(settingsFragment.DefaultColor);
 
         drawer = findViewById(R.id.drawer_layout);
 
@@ -55,6 +62,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        View header =navigationView.getHeaderView(0);
+
+        // setting colors for header and background
+
+        int[] colors;
+        if(SettingsFragment.Darkmode){
+            colors = new int[] {
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    SettingsFragment.DefaultColor,
+            };
+        }
+        else{
+            colors = new int[] {
+                    Color.BLACK,
+                    Color.BLACK,
+                    Color.BLACK,
+                    SettingsFragment.DefaultColor,
+            };
+        }
+        int[][] states = new int[][] {
+                new int[] {android.R.attr.state_selected}, // disabled
+                new int[] {-android.R.attr.state_checked}, // unchecked
+                new int[] { android.R.attr.state_pressed},  // pressed
+                new int[] { -android.R.attr.state_selected}  // pressed
+        };
+
+
+        ColorStateList myList = new ColorStateList(states, colors);
+        if(settingsFragment!=null && settingsFragment.DefaultColor!=0) {
+            header.setBackgroundColor(SettingsFragment.DefaultColor);
+            navigationView.setItemTextColor(myList);
+            navigationView.setItemIconTintList(myList);
+
+        }
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
