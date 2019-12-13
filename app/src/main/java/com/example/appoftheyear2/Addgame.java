@@ -39,6 +39,7 @@ public class Addgame extends AppCompatActivity {
         scoreInput = findViewById(R.id.ScoreEdit);
 
 
+
         addGameButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

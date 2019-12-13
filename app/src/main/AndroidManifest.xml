@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Gamedetails"></activity>
+        <activity android:name=".EditGame"></activity>
+        <activity android:name=".Gamedetails" />
         <activity android:name=".Addgame" />
         <activity
             android:name=".MainActivity"

@@ -31,10 +31,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Console;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class ListFragment extends Fragment {
@@ -98,13 +100,15 @@ public class ListFragment extends Fragment {
 
         gameRecyclerView.setLayoutManager(gameLayourManager);
         gameRecyclerView.setAdapter(gameRecycleAdapter);
+
+
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loadData();
-
         final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
@@ -112,6 +116,17 @@ public class ListFragment extends Fragment {
 
         builder = new AlertDialog.Builder(mView.getContext());
 
+        if (getArguments() != null) {
+            if (getArguments().getString("nameInput") != null) {
+                int position = Integer.valueOf(getArguments().getString("position"));
+                gameList.remove(position);
+                String newName = getArguments().getString("nameInput");
+                String newGenre = getArguments().getString("genreInput");
+                int newScore = Integer.valueOf(getArguments().getString("scoreInput"));
+                gameList.add(position, new Game(newName, newGenre, newScore));
+                gameAdapter.notifyDataSetChanged();
+            }
+        }
         ImageButton activityButton = view.findViewById(R.id.ActivityButton);
         activityButton.setOnClickListener(new View.OnClickListener(){
             @Override
