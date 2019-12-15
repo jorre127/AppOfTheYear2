@@ -11,7 +11,7 @@
         <item name="cardbackground">#F1EAEA</item>
         <item name="textcolor">#000000</item>
         <item name="tintcolor">#4B4141</item>
-        <item name="buttoncolor">#FF0000</item>
+        <item name="buttoncolor">#504B4B</item>
 
         <item name = "windowActionBar">false</item>
         <item name ="windowNoTitle">true</item>
@@ -29,7 +29,7 @@
         <item name="cardbackground">#504B4B</item>
         <item name="textcolor">#FFFEFE</item>
         <item name="tintcolor">#FFFEFE</item>
-        <item name="buttoncolor">#FF0000</item>
+        <item name="buttoncolor">#F1EAEA</item>
 
         <item name = "windowActionBar">false</item>
         <item name ="windowNoTitle">true</item>

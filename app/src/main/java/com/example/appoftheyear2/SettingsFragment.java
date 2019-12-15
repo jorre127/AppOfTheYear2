@@ -33,6 +33,7 @@ public class SettingsFragment extends Fragment {
     public static boolean Darkmode = false;
     public static boolean recreate = false;
 
+    public static String name = "                     Settings";
     Button button;
     public static int DefaultColor = 0;
 

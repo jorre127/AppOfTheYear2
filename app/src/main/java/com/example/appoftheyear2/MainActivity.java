@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.provider.Settings;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private SettingsFragment settingsFragment = new SettingsFragment();
+    private HomeFragment homeFragment = new HomeFragment();
+    private ListFragment listFragment = new ListFragment();
+    private SearchFragment searchFragment = new SearchFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Slide over menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle(HomeFragment.name); //string is custom name you want
+
+
         if(settingsFragment!=null && settingsFragment.DefaultColor!=0)
         toolbar.setBackgroundColor(settingsFragment.DefaultColor);
 
@@ -111,15 +119,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.nav_Settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+                getSupportActionBar().setTitle(SettingsFragment.name); //string is custom name you want
                 break;
             case R.id.nav_Search:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SearchFragment()).commit();
+                getSupportActionBar().setTitle(SearchFragment.name); //string is custom name you want
                 break;
             case R.id.nav_Home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                getSupportActionBar().setTitle(HomeFragment.name); //string is custom name you want
                 break;
             case R.id.nav_List:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ListFragment()).commit();
+                getSupportActionBar().setTitle(ListFragment.name); //string is custom name you want
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

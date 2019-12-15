@@ -48,6 +48,7 @@ public class ListFragment extends Fragment {
     private RecyclerView.LayoutManager gameLayourManager;
     private ArrayAdapter<Game> gameAdapter;
 
+    public static String name = "                       List";
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
