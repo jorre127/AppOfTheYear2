@@ -39,7 +39,7 @@ import java.util.Arrays;
 
 public class ListFragment extends Fragment {
 
-    private ArrayList<Game> gameList =  new ArrayList<>();
+    public static ArrayList<Game> gameList =  new ArrayList<>();
 
     private Activity mActivity;
     private View mView;

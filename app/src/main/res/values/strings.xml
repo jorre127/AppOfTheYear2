@@ -17,4 +17,5 @@
     <string name="GameNameColumnText">Name:</string>
     <string name="GameGenreColumnText">Genre:</string>
     <string name="darkmode_string">Darkmode</string>
+    <string name="AverageScoreText">Average Score:</string>
 </resources>

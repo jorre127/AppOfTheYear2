@@ -10,6 +10,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -29,9 +31,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchListener;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Set;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -43,11 +49,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private HomeFragment homeFragment = new HomeFragment();
     private ListFragment listFragment = new ListFragment();
     private SearchFragment searchFragment = new SearchFragment();
+    public ArrayList<Game> gameList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Enables Darkmode
         super.onCreate(savedInstanceState);
+
 
             if (SettingsFragment.Darkmode) {
                 setTheme(R.style.DarkTheme);
@@ -118,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_Home);
         }
+        loadData();
 
     }
 
@@ -133,12 +143,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportActionBar().setTitle(SearchFragment.name); //string is custom name you want
                 break;
             case R.id.nav_Home:
+                loadData();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 getSupportActionBar().setTitle(HomeFragment.name); //string is custom name you want
+                HomeFragment.gameList = gameList;
                 break;
             case R.id.nav_List:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ListFragment()).commit();
                 getSupportActionBar().setTitle(ListFragment.name); //string is custom name you want
+                gameList = ListFragment.gameList;
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -147,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        loadData();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -158,4 +172,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void ApplyNewGame(Game editedGame) {
 
     }
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("gameList", null);
+        Type type = new TypeToken<ArrayList<Game>>() {}.getType();
+        gameList = gson.fromJson(json, type);
+
+        if (gameList == null){
+            gameList = new ArrayList<>();
+        }
+    }
+
 }
