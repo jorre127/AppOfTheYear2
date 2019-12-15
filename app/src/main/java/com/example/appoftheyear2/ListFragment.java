@@ -41,7 +41,7 @@ import java.util.Objects;
 
 public class ListFragment extends Fragment {
 
-    private ArrayList<Game> gameList =  new ArrayList<>();
+   public static ArrayList<Game> gameList =  new ArrayList<>();
 
     private Activity mActivity;
     private View mView;
@@ -54,6 +54,7 @@ public class ListFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
+
     }
 
 
@@ -73,7 +74,7 @@ public class ListFragment extends Fragment {
 
     }
 
-    private void saveData(){
+    public void saveData(){
         SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -101,8 +102,7 @@ public class ListFragment extends Fragment {
 
         gameRecyclerView.setLayoutManager(gameLayourManager);
         gameRecyclerView.setAdapter(gameRecycleAdapter);
-
-
+        gameAdapter.notifyDataSetChanged();
 
     }
 
@@ -124,8 +124,7 @@ public class ListFragment extends Fragment {
                 startActivityForResult(new Intent(getContext(), Addgame.class),1);
             }
         });
-
-
+        gameAdapter.notifyDataSetChanged();
         return view;
     }
 
@@ -133,11 +132,13 @@ public class ListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         saveData();
+        gameAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
 
         saveData();
         gameAdapter.notifyDataSetChanged();

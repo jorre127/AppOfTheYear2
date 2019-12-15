@@ -20,13 +20,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Observable;
 
-public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder> implements Dialog.DialogListener {
+public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder> implements Dialog.DialogListener  {
 
-    public ArrayList<Game> gameList;
+    public static ArrayList<Game> gameList;
     public Context context;
     int position;
 
@@ -38,14 +39,13 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         gameList.add(editedGame);
         notifyDataSetChanged();
     }
-
     public static class gameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView gameNameView;
         public TextView gameGenreView;
         public ImageButton deleteButtton;
         public ImageButton editButton;
         final gameAdapter mAdapter;
-        ArrayList<Game> gameListt;
+        public static ArrayList<Game> gameListt;
         Context mContext;
 
         public gameViewHolder(@NonNull View itemView, gameAdapter gameAdapterIn, Context mContextIn) {
@@ -120,19 +120,21 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                     }
                 });
             }
+            EditGame.gameAdapter = this;
             if (holder.editButton != null){
                 holder.editButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, EditGame.class);
+                        Intent intent = new Intent(context,EditGame.class);
                         intent.putExtra("position", position);
                         intent.putExtra("currentGameName", currentGame.getName());
                         intent.putExtra("currentGameGenre", currentGame.getGenre());
                         intent.putExtra("currentGameScore", currentGame.getScore());
+                        intent.putExtra("currentGamePosition", gameList.indexOf(currentGame));
                         ((Activity)context).startActivityForResult(intent, 1);
+
                     }
                 });
-
             }
         }
 

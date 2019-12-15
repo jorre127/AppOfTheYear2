@@ -90,7 +90,7 @@ public class SettingsFragment extends Fragment {
         return view;
     }
 
-    public void restartApp(){
+    public  void restartApp(){
         activity.recreate();
     }
     private void OpenColorPicker (boolean AlphaSupport){
