@@ -36,7 +36,7 @@ import java.util.Set;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Dialog.DialogListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private SettingsFragment settingsFragment = new SettingsFragment();
@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         // Enables Darkmode
         super.onCreate(savedInstanceState);
 
@@ -154,8 +157,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public void ApplyNewGame(Game editedGame) {
-
-    }
 }

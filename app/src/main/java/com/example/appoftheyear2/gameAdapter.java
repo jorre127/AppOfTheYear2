@@ -1,5 +1,6 @@
 package com.example.appoftheyear2;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,20 +13,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Observable;
 
-public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder> implements Dialog.DialogListener {
+public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder> implements Dialog.DialogListener  {
 
-    public ArrayList<Game> gameList;
+    public static ArrayList<Game> gameList;
     public Context context;
     int position;
+
+
 
     @Override
     public void ApplyNewGame(Game editedGame) {
@@ -33,14 +39,13 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
         gameList.add(editedGame);
         notifyDataSetChanged();
     }
-
     public static class gameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView gameNameView;
         public TextView gameGenreView;
         public ImageButton deleteButtton;
         public ImageButton editButton;
         final gameAdapter mAdapter;
-        ArrayList<Game> gameListt;
+        public static ArrayList<Game> gameListt;
         Context mContext;
 
         public gameViewHolder(@NonNull View itemView, gameAdapter gameAdapterIn, Context mContextIn) {
@@ -64,6 +69,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             i.putExtra("currentGameName", currentGame.Name);
             i.putExtra("currentGameGenre", currentGame.Genre);
             i.putExtra("currentGameScore", currentGame.Score);
+            i.putExtra("position", getLayoutPosition());
             mContext.startActivity(i);
 
         }
@@ -74,6 +80,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
     public gameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_item, null);
         context = parent.getContext();
+
         return new gameViewHolder(v, this, context);
     }
 
@@ -87,6 +94,8 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
     public void onBindViewHolder(@NonNull gameViewHolder holder, final int position) {
         final Game currentGame = gameList.get(position);
         this.position = position;
+
+
 
         if (currentGame != null) {
             holder.gameNameView.setText(currentGame.getName());
@@ -111,31 +120,35 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                     }
                 });
             }
+            EditGame.gameAdapter = this;
             if (holder.editButton != null){
                 holder.editButton.setOnClickListener(new View.OnClickListener() {
-                    Dialog dialog;
                     @Override
                     public void onClick(View v) {
-                        dialog = new Dialog();
-                        dialog.show(((FragmentActivity)context).getSupportFragmentManager(), "dialogEdit");
-                        if (dialog.editedGame!=null) {
-                            gameList.set(position, dialog.editedGame);
-                        }
+                        Intent intent = new Intent(context,EditGame.class);
+                        intent.putExtra("position", position);
+                        intent.putExtra("currentGameName", currentGame.getName());
+                        intent.putExtra("currentGameGenre", currentGame.getGenre());
+                        intent.putExtra("currentGameScore", currentGame.getScore());
+                        intent.putExtra("currentGamePosition", gameList.indexOf(currentGame));
+                        ((Activity)context).startActivityForResult(intent, 1);
+
                     }
                 });
-
-
             }
         }
 
 
     }
 
-
+    
 
     @Override
     public int getItemCount() {
         return gameList.size();
     }
 
+
+
 }
+

@@ -31,15 +31,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Console;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class ListFragment extends Fragment {
 
-    private ArrayList<Game> gameList =  new ArrayList<>();
+   public static ArrayList<Game> gameList =  new ArrayList<>();
 
     private Activity mActivity;
     private View mView;
@@ -53,6 +55,7 @@ public class ListFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
+
     }
 
 
@@ -69,9 +72,10 @@ public class ListFragment extends Fragment {
                 gameRecycleAdapter.notifyDataSetChanged();
             }
         }
+
     }
 
-    private void saveData(){
+    public void saveData(){
         SharedPreferences sharedPreferences = mActivity.getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -99,13 +103,14 @@ public class ListFragment extends Fragment {
 
         gameRecyclerView.setLayoutManager(gameLayourManager);
         gameRecyclerView.setAdapter(gameRecycleAdapter);
+        gameAdapter.notifyDataSetChanged();
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loadData();
-
         final AlertDialog.Builder builder;
         final View view = inflater.inflate(R.layout.fragment_list,container,false  );
         mView = view;
@@ -120,6 +125,7 @@ public class ListFragment extends Fragment {
                 startActivityForResult(new Intent(getContext(), Addgame.class),1);
             }
         });
+        gameAdapter.notifyDataSetChanged();
         return view;
     }
 
@@ -127,5 +133,15 @@ public class ListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         saveData();
+        gameAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        saveData();
+        gameAdapter.notifyDataSetChanged();
     }
 }
