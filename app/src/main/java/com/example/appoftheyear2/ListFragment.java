@@ -41,7 +41,7 @@ import java.util.Objects;
 
 public class ListFragment extends Fragment {
 
-   public static ArrayList<Game> gameList =  new ArrayList<>();
+    public static ArrayList<Game> gameList =  new ArrayList<>();
 
     private Activity mActivity;
     private View mView;
