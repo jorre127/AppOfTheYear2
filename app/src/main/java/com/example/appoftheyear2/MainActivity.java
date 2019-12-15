@@ -171,10 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public void ApplyNewGame(Game editedGame) {
 
-    }
     private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         Gson gson = new Gson();
