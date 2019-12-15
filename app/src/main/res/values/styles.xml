@@ -72,4 +72,8 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">#6B6B6B</item>
+    </style>
+
 </resources>

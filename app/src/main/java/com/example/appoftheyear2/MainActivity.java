@@ -12,13 +12,17 @@ import androidx.fragment.app.Fragment;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.provider.Settings;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(HomeFragment.name); //string is custom name you want
 
 
         if(settingsFragment!=null && settingsFragment.DefaultColor!=0)
@@ -105,13 +108,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             header.setBackgroundColor(SettingsFragment.DefaultColor);
             navigationView.setItemTextColor(myList);
             navigationView.setItemIconTintList(myList);
-
         }
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.fragment_settings,null);
+        Switch Switch = view.findViewById(R.id.notificationsSwitch);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_Home);
         }
+
     }
 
     @Override
