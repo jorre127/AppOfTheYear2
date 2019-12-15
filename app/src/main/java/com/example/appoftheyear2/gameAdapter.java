@@ -69,6 +69,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             i.putExtra("currentGameName", currentGame.Name);
             i.putExtra("currentGameGenre", currentGame.Genre);
             i.putExtra("currentGameScore", currentGame.Score);
+            i.putExtra("position", getLayoutPosition());
             mContext.startActivity(i);
 
         }
@@ -121,7 +122,6 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             }
             if (holder.editButton != null){
                 holder.editButton.setOnClickListener(new View.OnClickListener() {
-                    Dialog dialog;
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, EditGame.class);
@@ -129,10 +129,9 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                         intent.putExtra("currentGameName", currentGame.getName());
                         intent.putExtra("currentGameGenre", currentGame.getGenre());
                         intent.putExtra("currentGameScore", currentGame.getScore());
-                        context.startActivity(intent);
+                        ((Activity)context).startActivityForResult(intent, 1);
                     }
                 });
-
 
             }
         }
@@ -140,7 +139,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
 
     }
 
-
+    
 
     @Override
     public int getItemCount() {

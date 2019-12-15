@@ -70,6 +70,7 @@ public class ListFragment extends Fragment {
                 gameRecycleAdapter.notifyDataSetChanged();
             }
         }
+
     }
 
     private void saveData(){
@@ -116,17 +117,6 @@ public class ListFragment extends Fragment {
 
         builder = new AlertDialog.Builder(mView.getContext());
 
-        if (getArguments() != null) {
-            if (getArguments().getString("nameInput") != null) {
-                int position = Integer.valueOf(getArguments().getString("position"));
-                gameList.remove(position);
-                String newName = getArguments().getString("nameInput");
-                String newGenre = getArguments().getString("genreInput");
-                int newScore = Integer.valueOf(getArguments().getString("scoreInput"));
-                gameList.add(position, new Game(newName, newGenre, newScore));
-                gameAdapter.notifyDataSetChanged();
-            }
-        }
         ImageButton activityButton = view.findViewById(R.id.ActivityButton);
         activityButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -134,6 +124,8 @@ public class ListFragment extends Fragment {
                 startActivityForResult(new Intent(getContext(), Addgame.class),1);
             }
         });
+
+
         return view;
     }
 
@@ -141,5 +133,13 @@ public class ListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         saveData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        saveData();
+        gameAdapter.notifyDataSetChanged();
     }
 }
