@@ -14,7 +14,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
-        android:hint="@string/GameNameAddHint"
         android:textColor="?attr/textcolor"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,23 +66,121 @@
 
     <EditText
         android:id="@+id/ScoreEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="29dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="102dp"
         android:ems="10"
-        android:hint="@string/scoreInputText"
         android:inputType="number"
         android:textColor="?attr/textcolor"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scoreText"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="212dp"
-        android:layout_height="49dp"
+        android:layout_width="213dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/genreText"
         app:layout_constraintTop_toBottomOf="@+id/editGameName" />
+
+    <TextView
+        android:id="@+id/scoreTenText"
+        android:layout_width="35dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="6dp"
+        android:ems="10"
+        android:text="/10"
+        android:textColor="?attr/textcolor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ScoreEdit"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <Spinner
+        android:id="@+id/statusSpinner"
+        android:layout_width="214dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/statusText"
+        app:layout_constraintTop_toBottomOf="@+id/timeplayHourEdit" />
+
+    <TextView
+        android:id="@+id/GametimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Time Played:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreText" />
+
+    <EditText
+        android:id="@+id/timeplayHourEdit"
+        android:layout_width="52dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="61dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/GametimeText"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+
+    <TextView
+        android:id="@+id/hoursText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="H."
+        app:layout_constraintStart_toEndOf="@+id/timeplayHourEdit"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+
+    <TextView
+        android:id="@+id/minutesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="M."
+        app:layout_constraintStart_toEndOf="@+id/timeplayMinutesEdit"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+
+    <TextView
+        android:id="@+id/secondsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="S."
+        app:layout_constraintStart_toEndOf="@+id/timeplaySecondsEdit"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+
+    <EditText
+        android:id="@+id/timeplayMinutesEdit"
+        android:layout_width="45dp"
+        android:layout_height="36dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/hoursText"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+
+    <EditText
+        android:id="@+id/timeplaySecondsEdit"
+        android:layout_width="58dp"
+        android:layout_height="32dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/minutesText"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Status:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GametimeText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

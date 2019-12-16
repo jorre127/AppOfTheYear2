@@ -4,11 +4,15 @@ public class Game {
     String Name;
     String Genre;
     int Score;
+    String Status;
+    float HoursPlayed;
 
-    public Game(String NameIn, String GenreIn, int ScoreIn){
+    public Game(String NameIn, String GenreIn, int ScoreIn, float HoursPlayedIn, String StatusIn){
         Name = NameIn;
         Genre = GenreIn;
         Score = ScoreIn;
+        Status = StatusIn;
+        HoursPlayed = HoursPlayedIn;
     }
 
     public String getName(){

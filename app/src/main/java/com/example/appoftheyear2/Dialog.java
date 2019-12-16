@@ -43,7 +43,6 @@ public class Dialog extends AppCompatDialogFragment {
                         String gamegenre = editGamegenre.getText().toString();
                         String gamescore = editGamescore.getText().toString();
 
-                        editedGame = new Game(gamename, gamegenre, Integer.valueOf(gamescore));
                         listener.ApplyNewGame(editedGame);
                     }
                 });

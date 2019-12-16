@@ -93,7 +93,7 @@ public class EditGame extends AppCompatActivity {
 
     public Game getGame(){
         if (nameInput != null) {
-            return new Game(nameInput.getText().toString(), genreInput.getText().toString(), Integer.valueOf(scoreInput.getText().toString()));
+            return new Game(nameInput.getText().toString(), genreInput.getText().toString(), Integer.valueOf(scoreInput.getText().toString()), 0, "");
         }
         return null;
     }

@@ -64,7 +64,7 @@ public class ListFragment extends Fragment {
 
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")));
+                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")), data.getFloatExtra("hoursPlayed",0), data.getStringExtra("statusInput"));
                 gameList.add(newGame);
                 saveData();
 
