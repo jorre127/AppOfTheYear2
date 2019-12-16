@@ -22,6 +22,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
     private Button addGameButon;
     private EditText nameInput;
     private EditText scoreInput;
+    private EditText dateInput;
     private Spinner genreInnput;
     private String genreSelection = "";
     private String statusSelection = "";
@@ -52,6 +53,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
         scoreInput = findViewById(R.id.ScoreEdit);
         genreInnput = findViewById(R.id.spinner);
         statusInput = findViewById(R.id.statusSpinner);
+        dateInput = findViewById(R.id.dateEdit);
         hoursInput = findViewById(R.id.timeplayHourEdit);
         minutesInput = findViewById(R.id.timeplayMinutesEdit);
         secondsInput = findViewById(R.id.timeplaySecondsEdit);
@@ -82,6 +84,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
                     returnIntent.putExtra("scoreInput", scoreInput.getText().toString());
                     returnIntent.putExtra("statusInput", statusSelection);
                     returnIntent.putExtra("hoursPlayed", playtimeTotalHours);
+                    returnIntent.putExtra("releaseDate", dateInput.getText().toString());
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
                 }

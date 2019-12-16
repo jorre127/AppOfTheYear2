@@ -28,6 +28,7 @@ public class EditGame extends AppCompatActivity {
     public Button addGameButton;
     public EditText nameInput;
     public EditText genreInput;
+    public EditText dateInput;
     public EditText scoreInput;
     public static boolean Refresh = false;
     Intent intent;
