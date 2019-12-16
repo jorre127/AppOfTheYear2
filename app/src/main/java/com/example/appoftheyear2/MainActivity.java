@@ -141,11 +141,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
         String getCurrentDateTime = sdf.format(c.getTime());
-        if (notificationSetting == true) {
+
+        if (notificationSetting == true && gameList != null ) {
             for (int i = 0; i < gameList.size(); i++) {
                 String getMyTime = gameList.get(i).toString();
                 Log.d("getCurrentDateTime", getCurrentDateTime);
-                // getCurrentDateTime: 05/23/2016 18:49 PM
+                
 
                 if (getCurrentDateTime.compareTo(getMyTime) < 0) {
                     createNotificationChannel();
