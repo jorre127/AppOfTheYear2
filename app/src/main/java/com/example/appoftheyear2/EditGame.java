@@ -46,7 +46,7 @@ public class EditGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_game);
 
-        if (SettingsFragment.Darkmode) {
+        if (MainActivity.Darkmode) {
             setTheme(R.style.DarkTheme);
         } else {
             setTheme(R.style.AppTheme);

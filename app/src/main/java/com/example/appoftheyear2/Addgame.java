@@ -40,7 +40,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (SettingsFragment.Darkmode) {
+        if (MainActivity.Darkmode) {
             setTheme(R.style.DarkTheme);
         } else {
             setTheme(R.style.AppTheme);

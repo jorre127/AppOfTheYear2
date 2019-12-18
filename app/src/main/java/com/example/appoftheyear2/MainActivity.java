@@ -56,27 +56,21 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DrawerLayout drawer;
-    public boolean notificationSetting = true;
-    private SettingsFragment settingsFragment = new SettingsFragment();
-    private HomeFragment homeFragment = new HomeFragment();
-    private ListFragment listFragment = new ListFragment();
-    private SearchFragment searchFragment = new SearchFragment();
-    public ArrayList<Game> gameList;
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
     private static final String ACTION_UPDATE_NOTIFICATION = "com.example.android.notifyme.ACTION_UPDATE_NOTIFICATION";
     private static final int NOTIFICATION_ID = 0;
+    public SettingsFragment settingsFragment;
+    public static boolean json;
+    public boolean notificationSetting = true;
+    public ArrayList<Game> gameList;
+    public static boolean Darkmode;
+    private DrawerLayout drawer;
+    private HomeFragment homeFragment = new HomeFragment();
+    private ListFragment listFragment = new ListFragment();
+    private SearchFragment searchFragment = new SearchFragment();
     private NotificationManager mNotifyManager;
     private NotificationReceiver mReceiver = new NotificationReceiver();
-    public class NotificationReceiver extends BroadcastReceiver {
-        public NotificationReceiver() {
-        }
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            updateNotification();
-        }
-    }
     public void createNotificationChannel(){
         mNotifyManager = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
@@ -89,21 +83,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNotifyManager.createNotificationChannel(notificationChannel);
         }
     }
-    private NotificationCompat.Builder getNotificationBuilder(){
+
+private NotificationCompat.Builder getNotificationBuilder(){
 
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("A Game Has Been Released!")
                 .setContentText("open the app to find out which game has been released")
                 .setSmallIcon(R.drawable.ic_android);
         return notifyBuilder;
-    };
+    }
+
     public void sendNotification(){
         Intent updateIntent = new Intent(ACTION_UPDATE_NOTIFICATION);
         PendingIntent updatePendingIntent = PendingIntent.getBroadcast(this, NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
         notifyBuilder.addAction(R.drawable.ic_update, "Update Notification", updatePendingIntent);
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
-    }
+    };
+
     public void updateNotification(){
         Bitmap androidImage = BitmapFactory.decodeResource(getResources(),R.drawable.ic_release);
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
@@ -112,22 +109,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setBigContentTitle("Notification Updated!"));
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
     }
+
     public void cancelNotification(){
         mNotifyManager.cancel(NOTIFICATION_ID);
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
 
         // Enables Darkmode
         super.onCreate(savedInstanceState);
 
-
-            if (SettingsFragment.Darkmode) {
+        loadDataDarkmode();
+            if (Darkmode) {
                 setTheme(R.style.DarkTheme);
             } else {
                 setTheme(R.style.AppTheme);
@@ -146,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int i = 0; i < gameList.size(); i++) {
                 String getMyTime = gameList.get(i).toString();
                 Log.d("getCurrentDateTime", getCurrentDateTime);
-                
+
 
                 if (getCurrentDateTime.compareTo(getMyTime) < 0) {
                     createNotificationChannel();
@@ -157,12 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-
-
-
-
-
-        if(settingsFragment!=null && settingsFragment.DefaultColor!=0)
+        if(settingsFragment.DefaultColor!=0)
         toolbar.setBackgroundColor(settingsFragment.DefaultColor);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -179,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // setting colors for header and background
 
         int[] colors;
-        if(SettingsFragment.Darkmode){
+        if(Darkmode){
             colors = new int[] {
                     Color.WHITE,
                     Color.WHITE,
@@ -204,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         ColorStateList myList = new ColorStateList(states, colors);
-        if(settingsFragment!=null && settingsFragment.DefaultColor!=0) {
+        if(settingsFragment.DefaultColor!=0) {
             header.setBackgroundColor(SettingsFragment.DefaultColor);
             navigationView.setItemTextColor(myList);
             navigationView.setItemIconTintList(myList);
@@ -259,7 +248,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -271,10 +259,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             gameList = new ArrayList<>();
         }
     }
+
     @Override
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
         super.onDestroy();
+    }
+
+    public class NotificationReceiver extends BroadcastReceiver {
+        public NotificationReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateNotification();
+        }
+    }
+
+    public void loadDataDarkmode(){
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
+        Darkmode = sharedPreferences.getBoolean("darkMode", false);
+        SettingsFragment.DefaultColor = sharedPreferences.getInt("Color", 0);
+
     }
 
 }

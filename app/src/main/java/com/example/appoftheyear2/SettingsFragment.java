@@ -3,6 +3,7 @@ package com.example.appoftheyear2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,19 +20,24 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchListener;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 
 public class SettingsFragment extends Fragment {
 
-    DayNightSwitch dayNightSwitch;
+    public static DayNightSwitch dayNightSwitch;
     View background_view;
-    Activity activity;
-    public static boolean Darkmode = false;
+
     public static boolean recreate = false;
+    Activity activity;
 
     public static String name = "                     Settings";
     Button button;
@@ -39,22 +45,15 @@ public class SettingsFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         final View view =  inflater.inflate(R.layout.fragment_settings,container,false  );
         activity = getActivity();
-
         //DarkMode
-        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
-            Darkmode = true;
-        }
-        else{
-           Darkmode = false;
-        }
 
         dayNightSwitch = view.findViewById(R.id.darkmode_switch);
         background_view = view.findViewById(R.id.background_view);
 
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        if(MainActivity.Darkmode == true){
             dayNightSwitch.setIsNight(true);
         }
 
@@ -65,14 +64,16 @@ public class SettingsFragment extends Fragment {
                 if(is_night){
                     Toast.makeText(activity, "DarkMode On", Toast.LENGTH_SHORT).show();
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    Darkmode = true;
+                    MainActivity.Darkmode = true;
+                    saveData();
                     restartApp();
 
                 }
                 else{
                     Toast.makeText(activity, "DarkMode Off", Toast.LENGTH_SHORT).show();
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    Darkmode = false;
+                    MainActivity.Darkmode = false;
+                    saveData();
                     restartApp();
                 }
             }
@@ -104,9 +105,18 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 DefaultColor = color;
+                saveData();
                 restartApp();
             }
         });
         ambilWarnaDialog.show();
+    }
+
+    public void saveData(){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("darkMode", MainActivity.Darkmode);
+        editor.putInt("Color",DefaultColor);
+        editor.apply();
     }
 }
