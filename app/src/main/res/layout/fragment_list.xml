@@ -16,7 +16,6 @@
             android:id="@+id/RecyclerViewOfGame"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
             android:padding="4dp"
             app:layout_constraintBottom_toTopOf="@+id/ActivityButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,9 +25,9 @@
 
         <TextView
             android:id="@+id/GameNameColumn"
+            style="@style/GameDetailsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/GameNameColumnText"
             android:textColor="?attr/textcolor"
@@ -37,11 +36,12 @@
 
         <TextView
             android:id="@+id/GameGenreColumn"
+            style="@style/GameDetailsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="250dp"
+            android:layout_marginStart="165dp"
             android:layout_marginTop="16dp"
-            android:text="@string/GameGenreColumnText"
+            android:text="Status:"
             android:textColor="?attr/textcolor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
