@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -31,9 +32,11 @@ public class HomeFragment extends Fragment {
     Activity mActivity;
     public static String name = "                      Home";
     TextView scoreAverage;
+    TextView TotalHours;
     int allscores = 0;
     View mView;
     PieChart pieChart;
+    PieChart statusPieChart;
     ArrayList<String> genreList = new ArrayList<>();
     float adventureTotal = 0;
     float actionTotal = 0;
@@ -43,6 +46,13 @@ public class HomeFragment extends Fragment {
     float stealthTotal = 0;
     float fightingTotal = 0;
     float allGenresTotal = 0;
+    float totalHours = 0;
+    float allStatusesTotal = 0;
+    float wishlistTotal = 0;
+    float playingTotal = 0;
+    float backlogTotal = 0;
+    float completedTotal = 0;
+    float droppedTotal = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -59,15 +69,36 @@ public class HomeFragment extends Fragment {
         loadData();
         for (Game game: gameList
         ) {
+            switch (game.Status){
+                case "Wishlist":
+                    wishlistTotal++;
+                    break;
+                case "Playing":
+                    playingTotal++;
+                    break;
+                case "Backlog":
+                    backlogTotal++;
+                    break;
+                case "Completed":
+                    completedTotal++;
+                    break;
+                case "Dropped":
+                    droppedTotal++;
+                    break;
+            }
+            totalHours+= game.HoursPlayed;
             genreList.add(game.getGenre());
             allscores+= game.getScore();
+            allStatusesTotal++;
         }
         if(gameList.size()!= 0) {
             allscores /= gameList.size();
         }
         scoreAverage = mView.findViewById(R.id.scoreAmount);
-
+        TotalHours = mView.findViewById(R.id.hoursPlayedAmount);
         scoreAverage.setText(String.valueOf(allscores));
+        TotalHours.setText(String.valueOf(totalHours));
+
 
         for (String genre: genreList
              ) {
@@ -105,9 +136,34 @@ public class HomeFragment extends Fragment {
          stealthTotal/=allGenresTotal;
          fightingTotal/=allGenresTotal;
 
+         completedTotal/=allStatusesTotal;
+        droppedTotal/=allStatusesTotal;
+        wishlistTotal/=allStatusesTotal;
+        backlogTotal/=allStatusesTotal;
+        playingTotal/=allStatusesTotal;
+
         pieChart = mView.findViewById(R.id.genrePieChart);
+        statusPieChart = mView.findViewById(R.id.statusPieChart);
         pieChart.setUsePercentValues(true);
+        statusPieChart.setUsePercentValues(true);
         List<PieEntry> genres = new ArrayList<>();
+        List<PieEntry> statuses = new ArrayList<>();
+        if (completedTotal != 0){
+            statuses.add(new PieEntry(completedTotal, "Completed"));
+        }
+        if (droppedTotal != 0){
+            statuses.add(new PieEntry(droppedTotal, "Dropped"));
+        }
+        if(wishlistTotal != 0){
+            statuses.add(new PieEntry(wishlistTotal, "Wishlist"));
+        }
+        if(backlogTotal != 0){
+            statuses.add(new PieEntry(backlogTotal, "Backlog"));
+        }
+        if (playingTotal != 0){
+            statuses.add(new PieEntry(playingTotal, "Playing"));
+        }
+
         if (adventureTotal != 0){
             genres.add(new PieEntry(adventureTotal, "Adventure"));
         }
@@ -132,14 +188,26 @@ public class HomeFragment extends Fragment {
         }
 
 
-        PieDataSet pieDataSet = new PieDataSet(genres, "Genres");
+        PieDataSet pieDataSet = new PieDataSet(genres, "");
+        PieDataSet statusPieDataSet = new PieDataSet(statuses, "");
         PieData pieData = new PieData(pieDataSet);
+        PieData statusPieData = new PieData(statusPieDataSet);
         pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        statusPieDataSet.setColors(ColorTemplate.PASTEL_COLORS);
         pieChart.setData(pieData);
+        statusPieChart.setData(statusPieData);
         pieChart.animateXY(1400, 1400);
+        statusPieChart.animateXY(1400,1400);
         Description description = new Description();
         description.setText("");
         pieChart.setDescription(description);
+        statusPieChart.setDescription(description);
+        pieChart.setDrawHoleEnabled(false);
+        statusPieChart.setDrawHoleEnabled(false);
+        Legend l = pieChart.getLegend();
+        l.setEnabled(false);
+        Legend l2 = statusPieChart.getLegend();
+        l2.setEnabled(false);
         return view;
 
     }

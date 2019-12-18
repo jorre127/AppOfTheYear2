@@ -84,5 +84,23 @@
         app:layout_constraintTop_toBottomOf="@+id/GenreDetails"
         style="@style/GameDetailsStyle"/>
 
+    <TextView
+        android:id="@+id/gameHoursPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ScoreDetails"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreDetail" />
+
+    <TextView
+        android:id="@+id/gameStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ScoreDetails"
+        app:layout_constraintTop_toBottomOf="@+id/gameHoursPlayed" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

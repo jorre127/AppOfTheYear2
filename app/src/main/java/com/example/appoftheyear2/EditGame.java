@@ -28,6 +28,7 @@ public class EditGame extends AppCompatActivity {
     public Button addGameButton;
     public EditText nameInput;
     public EditText genreInput;
+    public EditText dateInput;
     public EditText scoreInput;
     public static boolean Refresh = false;
     Intent intent;
@@ -93,7 +94,7 @@ public class EditGame extends AppCompatActivity {
 
     public Game getGame(){
         if (nameInput != null) {
-            return new Game(nameInput.getText().toString(), genreInput.getText().toString(), Integer.valueOf(scoreInput.getText().toString()));
+            return new Game(nameInput.getText().toString(), genreInput.getText().toString(), Integer.valueOf(scoreInput.getText().toString()), 0, "");
         }
         return null;
     }
