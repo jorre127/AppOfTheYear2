@@ -22,6 +22,8 @@ public class Game {
     public String getGenre(){
         return Genre;
     }
+    public String getStatus(){return Status;}
+    public float getHoursPlayed(){return HoursPlayed;}
 
     public int getScore(){
         return Score;

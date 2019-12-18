@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.appoftheyear2.R;
 
 import java.lang.reflect.Array;
 
@@ -48,22 +51,23 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
 
         setContentView(R.layout.activity_addgame);
 
-        addGameButon = findViewById(R.id.addGameButton);
-        nameInput = findViewById(R.id.editGameName);
-        scoreInput = findViewById(R.id.ScoreEdit);
-        genreInnput = findViewById(R.id.spinner);
-        statusInput = findViewById(R.id.statusSpinner);
-        dateInput = findViewById(R.id.dateEdit);
-        hoursInput = findViewById(R.id.timeplayHourEdit);
-        minutesInput = findViewById(R.id.timeplayMinutesEdit);
-        secondsInput = findViewById(R.id.timeplaySecondsEdit);
+
+        addGameButon = findViewById(R.id.addGameButton_Add);
+        nameInput = findViewById(R.id.editGameName_Add);
+        scoreInput = findViewById(R.id.ScoreEdit_Add);
+        genreInnput = findViewById(R.id.spinner_Add);
+        statusInput = findViewById(R.id.statusSpinner_Add);
+        dateInput = findViewById(R.id.dateEdit_Add);
+        hoursInput = findViewById(R.id.timeplayHourEdit_Add);
+        minutesInput = findViewById(R.id.timeplayMinutesEdit_Add);
+        secondsInput = findViewById(R.id.timeplaySecondsEdit_Add);
 
         String[] genreOptions = new String[]{"Adventure", "Action", "JRPG", "Fighting", "Stealth", "Shooter", "Platformer"};
         String[] statusOptions = new String[]{"Wishlist", "Completed", "Backlog", "Dropped", "Playing"};
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, statusOptions);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, genreOptions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, R.layout.customspinnerdropdown, statusOptions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.customspinnerdropdown, genreOptions);
+        adapter.setDropDownViewResource(R.layout.customspinnerdropdown);
+        statusAdapter.setDropDownViewResource(R.layout.customspinnerdropdown);
 
         genreInnput.setAdapter(adapter);
         genreInnput.setOnItemSelectedListener(this);
@@ -99,7 +103,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
 
-        if (parent.getId() == R.id.spinner){
+        if (parent.getId() == R.id.spinner_Add){
             switch (position) {
                 case 0:
                     genreSelection = "Adventure";
@@ -126,7 +130,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
             }
         }
 
-        if (parent.getId() == R.id.statusSpinner){
+        if (parent.getId() == R.id.statusSpinner_Add){
 
             switch (position){
                 case 0:

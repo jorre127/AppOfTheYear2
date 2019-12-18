@@ -129,10 +129,12 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                     public void onClick(View v) {
                         Intent intent = new Intent(context,EditGame.class);
                         intent.putExtra("position", position);
-                        intent.putExtra("currentGameName", currentGame.getName());
-                        intent.putExtra("currentGameGenre", currentGame.getGenre());
+                        intent.putExtra("currentGameName", currentGame.Name);
+                        intent.putExtra("currentGameGenre", currentGame.Genre);
+                        intent.putExtra("currentGameStatus", currentGame.getStatus());
                         intent.putExtra("currentGameScore", currentGame.getScore());
                         intent.putExtra("currentGamePosition", gameList.indexOf(currentGame));
+                        intent.putExtra("timePlayed",currentGame.HoursPlayed);
                         ((Activity)context).startActivityForResult(intent, 1);
 
                     }

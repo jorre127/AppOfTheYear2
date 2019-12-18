@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/editGameName"
+        android:id="@+id/editGameName_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -19,11 +19,10 @@
         android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/GameNameText"
+        app:layout_constraintStart_toEndOf="@+id/GameNameText_Add"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
@@ -33,29 +32,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/timeplayHourEdit"
+        android:id="@+id/timeplayHourEdit_Add"
         android:layout_width="55dp"
         android:layout_height="49dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="number"
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/GametimeText"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+        app:layout_constraintStart_toEndOf="@+id/GametimeText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
     <EditText
-        android:id="@+id/dateEdit"
+        android:id="@+id/dateEdit_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:ems="10"
         android:inputType="number"
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/dateText"
-        app:layout_constraintTop_toBottomOf="@+id/statusSpinner" />
+        app:layout_constraintStart_toEndOf="@+id/dateText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/statusSpinner_Add" />
 
     <TextView
-        android:id="@+id/GameNameText"
+        android:id="@+id/GameNameText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -67,15 +66,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/timeplayMinutesEdit"
+        android:id="@+id/timeplayMinutesEdit_Add"
         android:layout_width="52dp"
         android:layout_height="49dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="number"
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/hoursText"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+        app:layout_constraintStart_toEndOf="@+id/hoursText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
     <View
         android:layout_width="match_parent"
@@ -98,15 +97,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/ScoreEdit"
+        android:id="@+id/ScoreEdit_Add"
         android:layout_width="29dp"
         android:layout_height="44dp"
         android:layout_marginTop="36dp"
         android:ems="10"
         android:inputType="number"
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/scoreText"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintStart_toEndOf="@+id/scoreText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Add" />
 
     <View
         android:layout_width="match_parent"
@@ -119,7 +118,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/scoreText"
+        android:id="@+id/scoreText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -128,7 +127,7 @@
         android:text="@string/scoreText"
         android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/genreText" />
+        app:layout_constraintTop_toBottomOf="@+id/genreText_Add" />
 
     <View
         android:layout_width="match_parent"
@@ -141,27 +140,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/minutesText"
+        android:id="@+id/minutesText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="M."
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/timeplayMinutesEdit"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+        app:layout_constraintStart_toEndOf="@+id/timeplayMinutesEdit_Add"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
     <TextView
-        android:id="@+id/hoursText"
+        android:id="@+id/hoursText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="H."
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/timeplayHourEdit"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+        app:layout_constraintStart_toEndOf="@+id/timeplayHourEdit_Add"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
     <TextView
-        android:id="@+id/statusText"
+        android:id="@+id/statusText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -170,10 +169,10 @@
         android:text="Status:"
         android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GametimeText" />
+        app:layout_constraintTop_toBottomOf="@+id/GametimeText_Add" />
 
     <TextView
-        android:id="@+id/dateText"
+        android:id="@+id/dateText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -182,10 +181,10 @@
         android:text="Release Date:"
         android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusText" />
+        app:layout_constraintTop_toBottomOf="@+id/statusText_Add" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_Add"
         android:layout_width="213dp"
         android:layout_height="43dp"
         android:layout_marginTop="24dp"
@@ -194,11 +193,11 @@
         android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/genreText"
-        app:layout_constraintTop_toBottomOf="@+id/editGameName" />
+        app:layout_constraintStart_toEndOf="@+id/genreText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/editGameName_Add" />
 
     <TextView
-        android:id="@+id/scoreTenText"
+        android:id="@+id/scoreTenText_Add"
         android:layout_width="35dp"
         android:layout_height="22dp"
         android:layout_marginTop="44dp"
@@ -208,11 +207,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ScoreEdit"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintStart_toEndOf="@+id/ScoreEdit_Add"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Add" />
 
     <Spinner
-        android:id="@+id/statusSpinner"
+        android:id="@+id/statusSpinner_Add"
         android:layout_width="214dp"
         android:layout_height="40dp"
         android:layout_marginTop="44dp"
@@ -220,11 +219,11 @@
         android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.371"
-        app:layout_constraintStart_toEndOf="@+id/statusText"
-        app:layout_constraintTop_toBottomOf="@+id/timeplayHourEdit" />
+        app:layout_constraintStart_toEndOf="@+id/statusText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/timeplayHourEdit_Add" />
 
     <TextView
-        android:id="@+id/genreText"
+        android:id="@+id/genreText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -233,7 +232,7 @@
         android:text="@string/GenreAddText"
         android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GameNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/GameNameText_Add" />
 
     <View
         android:layout_width="match_parent"
@@ -246,18 +245,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/timeplaySecondsEdit"
+        android:id="@+id/timeplaySecondsEdit_Add"
         android:layout_width="54dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="number"
         android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/minutesText"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+        app:layout_constraintStart_toEndOf="@+id/minutesText_Add"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
     <TextView
-        android:id="@+id/GametimeText"
+        android:id="@+id/GametimeText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -266,7 +265,7 @@
         android:text="Time Played:"
         android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreText" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreText_Add" />
 
     <View
         android:layout_width="match_parent"
@@ -279,26 +278,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addGameButton"
+        android:id="@+id/addGameButton_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:text="@string/AddGameButtonText"
         android:ems="10"
-        android:textColor="?attr/textcolor"
+        android:textColor="?attr/backgroundcolor"
+        android:background="@drawable/roundbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/secondsText"
+        android:id="@+id/secondsText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:textColor="?attr/textcolor"
         android:text="S."
-        app:layout_constraintStart_toEndOf="@+id/timeplaySecondsEdit"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
+        app:layout_constraintStart_toEndOf="@+id/timeplaySecondsEdit_Add"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
