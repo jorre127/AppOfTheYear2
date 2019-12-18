@@ -101,7 +101,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
 
         if (currentGame != null) {
             holder.gameNameView.setText(currentGame.getName());
-            holder.gameGenreView.setText(currentGame.getGenre());
+            holder.gameGenreView.setText(currentGame.Status);
 
             if (holder.deleteButtton != null) {
                 holder.deleteButtton.setOnClickListener(new View.OnClickListener(){

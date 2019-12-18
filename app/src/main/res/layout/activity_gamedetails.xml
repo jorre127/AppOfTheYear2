@@ -67,10 +67,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        style="@style/GameDetailsStyle"
         android:text="@string/GameGenreColumnText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GameNameDetails"
-        style="@style/GameDetailsStyle"/>
+        />
 
 
     <TextView
@@ -86,21 +87,49 @@
 
     <TextView
         android:id="@+id/gameHoursPlayed"
+        style="@style/GameDetailsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ScoreDetails"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/ScoreDetail" />
 
     <TextView
         android:id="@+id/gameStatusText"
+        style="@style/GameDetailsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ScoreDetails"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/gameHoursPlayed" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/GameDetailsStyle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Total Hours:"
+        android:textColor="?attr/textcolor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreDetails" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/GameDetailsStyle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Status:"
+        android:textColor="?attr/textcolor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
