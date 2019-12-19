@@ -26,6 +26,7 @@ public class Gamedetails extends AppCompatActivity {
     TextView gameScoreText;
     TextView gameStatusText;
     TextView gameHoursPlayed;
+    TextView gameReleaseText;
     RecyclerView gameList;
 
     @Override
@@ -44,6 +45,7 @@ public class Gamedetails extends AppCompatActivity {
         gameScoreText = findViewById(R.id.ScoreDetail);
         gameStatusText = findViewById(R.id.gameStatusText);
         gameHoursPlayed = findViewById(R.id.gameHoursPlayed);
+        gameReleaseText = findViewById(R.id.releaseDateDetail);
         gameList = findViewById(R.id.RecyclerViewOfGame);
 
         DecimalFormat format = new DecimalFormat("##.00");
@@ -60,5 +62,6 @@ public class Gamedetails extends AppCompatActivity {
         gameScoreText.setText(String.valueOf(newScoreText));
         gameStatusText.setText(newStatusText);
         gameHoursPlayed.setText(String.valueOf(format.format(newHoursPlayed)));
+        gameReleaseText.setText(getIntent().getStringExtra("currentGameRelease"));
     }
 }

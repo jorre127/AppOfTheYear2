@@ -71,6 +71,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             i.putExtra("currentGameScore", currentGame.Score);
             i.putExtra("currentGameStatus", currentGame.Status);
             i.putExtra("currentGameHoursPlayed", currentGame.HoursPlayed);
+            i.putExtra("currentGameRelease", currentGame.GameDate);
             i.putExtra("position", getLayoutPosition());
             mContext.startActivity(i);
 
