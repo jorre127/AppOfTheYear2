@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ListFragment listFragment = new ListFragment();
     private NotificationManager mNotifyManager;
     private NotificationReceiver mReceiver = new NotificationReceiver();
+    public String gameName;
+    Calendar c = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+    String getCurrentDateTime = sdf.format(c.getTime());
+
 
     public void createNotificationChannel(){
         mNotifyManager = (NotificationManager)
@@ -87,7 +92,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
 
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("A Game Has Been Released!")
-                .setContentText("open the app to find out which game has been released")
+                .setContentText(gameName +" has been released")
                 .setSmallIcon(R.drawable.ic_android);
         return notifyBuilder;
     }
@@ -130,25 +135,6 @@ private NotificationCompat.Builder getNotificationBuilder(){
         // Slide over menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-        String getCurrentDateTime = sdf.format(c.getTime());
-
-        if (notificationSetting == true && gameList != null ) {
-            for (int i = 0; i < gameList.size(); i++) {
-                String getMyTime = gameList.get(i).toString();
-                Log.d("getCurrentDateTime", getCurrentDateTime);
-
-
-                if (getCurrentDateTime.compareTo(getMyTime) < 0) {
-                    createNotificationChannel();
-                    sendNotification();
-                } else {
-                    Log.d("Return", "getMyTime older than getCurrentDateTime ");
-                }
-            }
-        }
 
         if(settingsFragment.DefaultColor!=0)
         toolbar.setBackgroundColor(settingsFragment.DefaultColor);
@@ -207,6 +193,20 @@ private NotificationCompat.Builder getNotificationBuilder(){
             navigationView.setCheckedItem(R.id.nav_Home);
         }
         loadData();
+        if (notificationSetting == true && gameList != null ) {
+            for (int i = 0; i < gameList.size(); i++) {
+                Game getMyTime = gameList.get(i);
+                String releaseDate = getMyTime.GameDate;
+                gameName = getMyTime.Name;
+                Log.d("getCurrentDateTime", getCurrentDateTime);
+                if (releaseDate.compareTo(getCurrentDateTime) < 0) {
+                    createNotificationChannel();
+                    sendNotification();
+                } else {
+                    Log.d("Return", "getMyTime older than getCurrentDateTime ");
+                }
+            }
+        }
 
     }
 

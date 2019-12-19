@@ -6,13 +6,15 @@ public class Game {
     int Score;
     String Status;
     float HoursPlayed;
+    String GameDate;
 
-    public Game(String NameIn, String GenreIn, int ScoreIn, float HoursPlayedIn, String StatusIn){
+    public Game(String NameIn, String GenreIn, int ScoreIn, float HoursPlayedIn, String StatusIn, String DateIn){
         Name = NameIn;
         Genre = GenreIn;
         Score = ScoreIn;
         Status = StatusIn;
         HoursPlayed = HoursPlayedIn;
+        GameDate = DateIn;
     }
 
     public String getName(){

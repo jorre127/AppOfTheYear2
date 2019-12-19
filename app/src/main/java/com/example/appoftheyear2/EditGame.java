@@ -51,7 +51,6 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
     public  EditGame(){
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -93,6 +92,7 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
             }
 
         }
+
 
         statusSelection = (intent.getStringExtra("currentGameStatus"));
 
