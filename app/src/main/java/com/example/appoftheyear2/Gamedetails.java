@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class Gamedetails extends AppCompatActivity {
 
+
+
     TextView gameNameText;
     TextView gameGenreText;
     TextView gameScoreText;
@@ -27,6 +29,13 @@ public class Gamedetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (MainActivity.Darkmode) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
+
         setContentView(R.layout.activity_gamedetails);
         gameNameText = findViewById(R.id.GameNameDetail);
         gameGenreText = findViewById(R.id.GenreDetail);

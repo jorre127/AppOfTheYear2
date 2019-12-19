@@ -4,10 +4,6 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Search"
-            android:icon="@drawable/ic_zoom_in"
-            android:title="Search" />
-        <item
             android:id="@+id/nav_Home"
             android:icon="@drawable/ic_home"
             android:title="Home"

@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private HomeFragment homeFragment = new HomeFragment();
     private ListFragment listFragment = new ListFragment();
-    private SearchFragment searchFragment = new SearchFragment();
     private NotificationManager mNotifyManager;
     private NotificationReceiver mReceiver = new NotificationReceiver();
 
@@ -217,10 +216,6 @@ private NotificationCompat.Builder getNotificationBuilder(){
             case R.id.nav_Settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 getSupportActionBar().setTitle(SettingsFragment.name); //string is custom name you want
-                break;
-            case R.id.nav_Search:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SearchFragment()).commit();
-                getSupportActionBar().setTitle(SearchFragment.name); //string is custom name you want
                 break;
             case R.id.nav_Home:
                 loadData();

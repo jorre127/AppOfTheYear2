@@ -57,6 +57,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/GameNameColumnText"
+        android:textColor="?attr/textcolor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/GameDetailsStyle"/>
@@ -68,6 +69,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         style="@style/GameDetailsStyle"
+        android:textColor="?attr/textcolor"
         android:text="@string/GameGenreColumnText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GameNameDetails"
@@ -80,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:textColor="?attr/textcolor"
         android:text="@string/scoreText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GenreDetails"
@@ -92,6 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/ScoreDetail" />
@@ -103,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textColor="?attr/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/gameHoursPlayed" />
