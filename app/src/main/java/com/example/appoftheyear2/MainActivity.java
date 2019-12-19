@@ -93,7 +93,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("A Game Has Been Released!")
                 .setContentText(gameName +" has been released")
-                .setSmallIcon(R.drawable.ic_android);
+                .setSmallIcon(R.drawable.ic_launcher_foreground2);
         return notifyBuilder;
     }
 
