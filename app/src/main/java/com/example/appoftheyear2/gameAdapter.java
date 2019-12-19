@@ -71,6 +71,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
             i.putExtra("currentGameScore", currentGame.Score);
             i.putExtra("currentGameStatus", currentGame.Status);
             i.putExtra("currentGameHoursPlayed", currentGame.HoursPlayed);
+            i.putExtra("currentGameRelease", currentGame.GameDate);
             i.putExtra("position", getLayoutPosition());
             mContext.startActivity(i);
 
@@ -135,6 +136,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                         intent.putExtra("currentGameScore", currentGame.getScore());
                         intent.putExtra("currentGamePosition", gameList.indexOf(currentGame));
                         intent.putExtra("timePlayed",currentGame.HoursPlayed);
+                        intent.putExtra("Date",currentGame.GameDate);
                         ((Activity)context).startActivityForResult(intent, 1);
 
                     }

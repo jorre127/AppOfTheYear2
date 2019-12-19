@@ -31,6 +31,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:ems="8"
+        android:text="Release Date:"
+        android:textColor="?attr/textcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusText" />
+
     <EditText
         android:id="@+id/timeplayHourEdit"
         android:layout_width="55dp"
@@ -42,16 +55,18 @@
         app:layout_constraintStart_toEndOf="@+id/GametimeText"
         app:layout_constraintTop_toBottomOf="@+id/ScoreEdit" />
 
-    <EditText
+    <com.vivekkaushik.datepicker.DatePickerTimeline
         android:id="@+id/dateEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/dateText"
-        app:layout_constraintTop_toBottomOf="@+id/statusSpinner" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:dateTextColor="?attr/textcolor"
+        app:monthTextColor="?attr/textcolor"
+        app:dayTextColor="?attr/textcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
     <TextView
         android:id="@+id/GameNameText"
@@ -107,16 +122,6 @@
         app:layout_constraintStart_toEndOf="@+id/scoreText"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="484dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/scoreText"
         android:layout_width="wrap_content"
@@ -171,17 +176,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GametimeText" />
 
-    <TextView
-        android:id="@+id/dateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="52dp"
-        android:ems="8"
-        android:text="Release Date:"
-        android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusText" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -281,15 +275,15 @@
         android:id="@+id/EditGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="Save!"
-        android:ems="10"
-        android:textColor="?attr/backgroundcolor"
+        android:layout_marginTop="32dp"
         android:background="@drawable/roundbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:ems="10"
+        android:text="Save!"
+        android:textColor="?attr/backgroundcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateEdit" />
 
     <TextView
         android:id="@+id/secondsText"

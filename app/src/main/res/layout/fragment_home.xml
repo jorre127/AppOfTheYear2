@@ -83,9 +83,9 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/genrePieChart"
-        android:layout_width="291dp"
-        android:layout_height="321dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="249dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="104dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreAverageTextView">
@@ -118,10 +118,11 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/statusPieChart"
-        android:layout_width="247dp"
-        android:layout_height="246dp"
-        android:layout_marginTop="440dp"
+        android:layout_width="234dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="364dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreAverageTextView">
 

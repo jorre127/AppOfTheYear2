@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int NOTIFICATION_ID = 0;
     public SettingsFragment settingsFragment;
     public static boolean json;
-    public boolean notificationSetting = true;
+    public static boolean notificationSetting = true;
     public ArrayList<Game> gameList;
     public static boolean Darkmode;
     private DrawerLayout drawer;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NotificationReceiver mReceiver = new NotificationReceiver();
     public String gameName;
     Calendar c = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
     String getCurrentDateTime = sdf.format(c.getTime());
 
 
@@ -93,7 +93,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("A Game Has Been Released!")
                 .setContentText(gameName +" has been released")
-                .setSmallIcon(R.drawable.ic_android);
+                .setSmallIcon(R.drawable.ic_launcher_foreground2);
         return notifyBuilder;
     }
 
@@ -199,7 +199,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
                 String releaseDate = getMyTime.GameDate;
                 gameName = getMyTime.Name;
                 Log.d("getCurrentDateTime", getCurrentDateTime);
-                if (releaseDate.compareTo(getCurrentDateTime) < 0) {
+                if (releaseDate.compareTo(getCurrentDateTime) == 0) {
                     createNotificationChannel();
                     sendNotification();
                 } else {
@@ -275,6 +275,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
         SharedPreferences sharedPreferences = getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         Darkmode = sharedPreferences.getBoolean("darkMode", false);
         SettingsFragment.DefaultColor = sharedPreferences.getInt("Color", 0);
+        notificationSetting = sharedPreferences.getBoolean("Notification",false);
 
     }
 
