@@ -41,10 +41,13 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
     private EditText hoursInput;
     private EditText minutesInput;
     private EditText secondsInput;
+    boolean dateselected = false;
     private float playtimeTotalHours;
     private int genrePosition;
     private int statusPosition;
     public static boolean Refresh = false;
+    String[]genreOptions;
+    String[]array;
     Intent intent;
     int position = -1;
     int ArrayPosition;
@@ -76,7 +79,7 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
         secondsInput = findViewById(R.id.timeplaySecondsEdit);
 
 
-        String[] genreOptions = new String[]{"Adventure", "Action", "JRPG", "Fighting", "Stealth", "Shooter", "Platformer"};
+        genreOptions = new String[]{"Adventure", "Action", "JRPG", "Fighting", "Stealth", "Shooter", "Platformer"};
         String[] statusOptions = new String[]{"Wishlist", "Completed", "Backlog", "Dropped", "Playing"};
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, R.layout.customspinnerdropdown, statusOptions);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.customspinnerdropdown, genreOptions);
@@ -90,15 +93,17 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
 
         final DatePickerTimeline datePickerTimeline = findViewById(R.id.dateEdit);
 
-        String[] array = new String[3];
+        array = new String[3];
         String stringDate = intent.getStringExtra("Date");
         array = stringDate.split("/");
 
+        dateselected = false;
         datePickerTimeline.setInitialDate(Integer.valueOf(array[2]), Integer.valueOf(array[1]), Integer.valueOf(array[0]));
         datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(int year, int month, int day, int dayOfWeek) {
                 dateInput =Integer.toString(day)+"/"+String.valueOf(month)+"/"+String.valueOf(year);
+                dateselected = true;
             }
 
             @Override
@@ -171,6 +176,9 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
                     game.Status = statusSelection;
                     game.HoursPlayed = playtimeTotalHours;
                     game.GameDate = dateInput;
+                    if(dateselected == false){
+                        game.GameDate = array[0]+"/"+array[1]+"/"+array[2];
+                    }
 
                     gameAdapter.notifyDataSetChanged();
 
