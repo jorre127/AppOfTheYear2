@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +16,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Addgame extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -31,6 +36,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
     private EditText minutesInput;
     private EditText secondsInput;
 
+
     private float playtimeTotalHours;
 
 
@@ -39,7 +45,6 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (SettingsFragment.Darkmode) {
             setTheme(R.style.DarkTheme);
         } else {
@@ -147,7 +152,6 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
             }
         }
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 

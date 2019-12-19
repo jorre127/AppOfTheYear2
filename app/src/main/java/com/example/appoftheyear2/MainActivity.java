@@ -51,12 +51,12 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    public static ArrayList<String> dates;
     public boolean notificationSetting = true;
     private SettingsFragment settingsFragment = new SettingsFragment();
     private HomeFragment homeFragment = new HomeFragment();
@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int NOTIFICATION_ID = 0;
     private NotificationManager mNotifyManager;
     private NotificationReceiver mReceiver = new NotificationReceiver();
+    Calendar c = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+    String getCurrentDateTime = sdf.format(c.getTime());
+
     public class NotificationReceiver extends BroadcastReceiver {
         public NotificationReceiver() {
         }
@@ -112,20 +116,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setBigContentTitle("Notification Updated!"));
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
     }
-    public void cancelNotification(){
+    public void cancelNotification()
+    {
         mNotifyManager.cancel(NOTIFICATION_ID);
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         // Enables Darkmode
         super.onCreate(savedInstanceState);
-
 
             if (SettingsFragment.Darkmode) {
                 setTheme(R.style.DarkTheme);
@@ -137,30 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Slide over menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-        String getCurrentDateTime = sdf.format(c.getTime());
-
-        if (notificationSetting == true && gameList != null ) {
-            for (int i = 0; i < gameList.size(); i++) {
-                String getMyTime = gameList.get(i).toString();
-                Log.d("getCurrentDateTime", getCurrentDateTime);
-                
-
-                if (getCurrentDateTime.compareTo(getMyTime) < 0) {
-                    createNotificationChannel();
-                    sendNotification();
-                } else {
-                    Log.d("Return", "getMyTime older than getCurrentDateTime ");
-                }
-            }
-        }
-
-
-
-
-
 
         if(settingsFragment!=null && settingsFragment.DefaultColor!=0)
         toolbar.setBackgroundColor(settingsFragment.DefaultColor);
@@ -220,6 +196,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         loadData();
 
+        if (notificationSetting && gameList != null ) {
+            for (int i = 0; i < gameList.size(); i++) {
+                Game getMyTime = gameList.get(i);
+                String releasedate = getMyTime.GameDate;
+                Log.d("getCurrentDateTime", getCurrentDateTime);
+                if(getCurrentDateTime != null && !getCurrentDateTime.isEmpty() && releasedate != null) {
+                    if (releasedate.compareTo(getCurrentDateTime) < 0) {
+                        createNotificationChannel();
+                        sendNotification();
+                    } else {
+                        Log.d("Return", "getMyTime older than getCurrentDateTime ");
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -271,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             gameList = new ArrayList<>();
         }
     }
+
     @Override
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);

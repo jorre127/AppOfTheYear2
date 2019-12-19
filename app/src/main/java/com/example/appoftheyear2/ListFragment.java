@@ -42,7 +42,6 @@ import java.util.Objects;
 public class ListFragment extends Fragment {
 
     public static ArrayList<Game> gameList =  new ArrayList<>();
-
     private Activity mActivity;
     private View mView;
     private RecyclerView gameRecyclerView;
@@ -64,7 +63,7 @@ public class ListFragment extends Fragment {
 
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")), data.getFloatExtra("hoursPlayed",0), data.getStringExtra("statusInput"));
+                Game newGame = new Game(data.getStringExtra("nameInput"), data.getStringExtra("genreInput"), Integer.parseInt(data.getStringExtra("scoreInput")), data.getFloatExtra("hoursPlayed",0), data.getStringExtra("statusInput"),data.getStringExtra("releaseDate"));
                 gameList.add(newGame);
                 saveData();
 

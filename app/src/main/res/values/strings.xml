@@ -18,4 +18,5 @@
     <string name="GameGenreColumnText">Genre:</string>
     <string name="darkmode_string">Darkmode</string>
     <string name="AverageScoreText">Average Score:</string>
+    <string name="date_text">DD/MM/YYYY</string>
 </resources>
