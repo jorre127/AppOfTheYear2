@@ -58,14 +58,8 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
         setContentView(R.layout.activity_addgame);
 
         final DatePickerTimeline datePickerTimeline = findViewById(R.id.dateEdit_Add);
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String getCurrentDateTime = sdf.format(c.getTime());
-        char[] dateCharArr = getCurrentDateTime.toCharArray();
-        int currentYear = Integer.valueOf(dateCharArr[6] + dateCharArr[7] + dateCharArr[8] + dateCharArr[9]);
-        int currentMonth = Integer.valueOf(dateCharArr[3] + dateCharArr[4]);
-        int currentDay = Integer.valueOf(dateCharArr[0] + dateCharArr[1]);
-        datePickerTimeline.setInitialDate(currentYear, currentMonth, currentDay);
+
+        datePickerTimeline.setInitialDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DATE));
         datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(int year, int month, int day, int dayOfWeek) {
