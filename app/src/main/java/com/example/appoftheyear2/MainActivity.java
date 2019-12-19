@@ -275,6 +275,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
         SharedPreferences sharedPreferences = getSharedPreferences("sharedpreferences", Context.MODE_PRIVATE);
         Darkmode = sharedPreferences.getBoolean("darkMode", false);
         SettingsFragment.DefaultColor = sharedPreferences.getInt("Color", 0);
+        notificationSetting = sharedPreferences.getBoolean("Notification",false);
 
     }
 

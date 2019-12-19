@@ -57,6 +57,10 @@ public class SettingsFragment extends Fragment {
         background_view = view.findViewById(R.id.background_view);
         notificationSwitch = view.findViewById(R.id.notificationsSwitch);
 
+        if(MainActivity.notificationSetting){
+            notificationSwitch.setChecked(true);
+        }
+
         if(MainActivity.Darkmode == true){
             dayNightSwitch.setIsNight(true);
         }
@@ -133,6 +137,7 @@ public class SettingsFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("darkMode", MainActivity.Darkmode);
         editor.putInt("Color",DefaultColor);
+        editor.putBoolean("Notification",MainActivity.notificationSetting);
         editor.apply();
     }
 }

@@ -122,17 +122,6 @@
         app:layout_constraintStart_toEndOf="@+id/scoreText"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-    <View
-        android:id="@+id/view14"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="484dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/scoreText"
         android:layout_width="wrap_content"
