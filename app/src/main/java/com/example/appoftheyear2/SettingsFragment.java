@@ -91,9 +91,11 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     MainActivity.notificationSetting = true;
+                    saveData();
                 }
                 else{
                     MainActivity.notificationSetting = false;
+                    saveData();
                 }
             }
         });
