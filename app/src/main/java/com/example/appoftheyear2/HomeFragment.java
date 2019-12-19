@@ -24,6 +24,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +96,13 @@ public class HomeFragment extends Fragment {
         if(gameList.size()!= 0) {
             allscores /= gameList.size();
         }
+        DecimalFormat format = new DecimalFormat("##.00");
+        format.setRoundingMode(RoundingMode.CEILING);
+
         scoreAverage = mView.findViewById(R.id.scoreAmount);
         TotalHours = mView.findViewById(R.id.hoursPlayedAmount);
         scoreAverage.setText(String.valueOf(allscores));
-        TotalHours.setText(String.valueOf(totalHours));
+        TotalHours.setText(String.valueOf(format.format(totalHours)));
 
 
         for (String genre: genreList

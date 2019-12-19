@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class Gamedetails extends AppCompatActivity {
 
@@ -44,17 +46,19 @@ public class Gamedetails extends AppCompatActivity {
         gameHoursPlayed = findViewById(R.id.gameHoursPlayed);
         gameList = findViewById(R.id.RecyclerViewOfGame);
 
+        DecimalFormat format = new DecimalFormat("##.00");
+        format.setRoundingMode(RoundingMode.CEILING);
 
         String newGameNameText = getIntent().getStringExtra("currentGameName");
         String newGenreText = getIntent().getStringExtra("currentGameGenre");
         int newScoreText = getIntent().getIntExtra("currentGameScore", 0);
         float newHoursPlayed = getIntent().getFloatExtra("currentGameHoursPlayed",0);
         String newStatusText = getIntent().getStringExtra("currentGameStatus");
-
+        String newHoursPlayedString = String.valueOf(newHoursPlayed);
         gameNameText.setText(newGameNameText);
         gameGenreText.setText(newGenreText);
         gameScoreText.setText(String.valueOf(newScoreText));
         gameStatusText.setText(newStatusText);
-        gameHoursPlayed.setText(String.valueOf(newHoursPlayed));
+        gameHoursPlayed.setText(String.valueOf(format.format(newHoursPlayed)));
     }
 }
