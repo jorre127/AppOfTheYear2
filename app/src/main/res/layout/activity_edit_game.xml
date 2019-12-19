@@ -108,6 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <View
+        android:id="@+id/view14"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="484dp"
@@ -281,15 +282,15 @@
         android:id="@+id/EditGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="Save!"
-        android:ems="10"
-        android:textColor="?attr/backgroundcolor"
+        android:layout_marginTop="32dp"
         android:background="@drawable/roundbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:ems="10"
+        android:text="Save!"
+        android:textColor="?attr/backgroundcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view14" />
 
     <TextView
         android:id="@+id/secondsText"

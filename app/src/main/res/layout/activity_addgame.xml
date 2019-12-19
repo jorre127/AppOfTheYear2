@@ -272,15 +272,15 @@
         android:id="@+id/addGameButton_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="@string/AddGameButtonText"
-        android:ems="10"
-        android:textColor="?attr/backgroundcolor"
+        android:layout_marginTop="32dp"
         android:background="@drawable/roundbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:ems="10"
+        android:text="@string/AddGameButtonText"
+        android:textColor="?attr/backgroundcolor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateEdit_Add" />
 
     <TextView
         android:id="@+id/secondsText_Add"
