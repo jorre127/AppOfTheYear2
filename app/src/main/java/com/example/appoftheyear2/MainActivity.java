@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int NOTIFICATION_ID = 0;
     private NotificationManager mNotifyManager;
     private NotificationReceiver mReceiver = new NotificationReceiver();
+    public String gameName;
     Calendar c = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
     String getCurrentDateTime = sdf.format(c.getTime());
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("A Game Has Been Released!")
-                .setContentText("open the app to find out which game has been released")
+                .setContentText(gameName +" has been released!")
                 .setSmallIcon(R.drawable.ic_android);
         return notifyBuilder;
     };
@@ -200,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int i = 0; i < gameList.size(); i++) {
                 Game getMyTime = gameList.get(i);
                 String releasedate = getMyTime.GameDate;
+                gameName = getMyTime.Name;
                 Log.d("getCurrentDateTime", getCurrentDateTime);
                 if(getCurrentDateTime != null && !getCurrentDateTime.isEmpty() && releasedate != null) {
                     if (releasedate.compareTo(getCurrentDateTime) < 0) {
