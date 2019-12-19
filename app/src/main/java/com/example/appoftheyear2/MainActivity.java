@@ -199,7 +199,7 @@ private NotificationCompat.Builder getNotificationBuilder(){
                 String releaseDate = getMyTime.GameDate;
                 gameName = getMyTime.Name;
                 Log.d("getCurrentDateTime", getCurrentDateTime);
-                if (releaseDate.compareTo(getCurrentDateTime) < 0) {
+                if (releaseDate.compareTo(getCurrentDateTime) == 0) {
                     createNotificationChannel();
                     sendNotification();
                 } else {

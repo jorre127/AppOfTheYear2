@@ -61,7 +61,8 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
         datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(int year, int month, int day, int dayOfWeek) {
-                dateInput =Integer.toString(day)+"/"+String.valueOf(month)+"/"+String.valueOf(year);
+
+                dateInput =Integer.toString(day)+"/"+String.valueOf(month+1)+"/"+String.valueOf(year);
             }
 
             @Override
@@ -71,7 +72,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
         });
 
         Date[] dates = {Calendar.getInstance().getTime()};
-        datePickerTimeline.deactivateDates(dates);
+        //datePickerTimeline.deactivateDates(dates);
 
 
         addGameButon = findViewById(R.id.addGameButton_Add);
