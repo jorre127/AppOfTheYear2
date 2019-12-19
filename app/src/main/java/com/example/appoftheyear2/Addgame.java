@@ -81,7 +81,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
         addGameButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!nameInput.getText().toString().equals("")) {
+                if (!nameInput.getText().toString().equals("") && !minutesInput.getText().toString().equals("") && !hoursInput.getText().toString().equals("") && !secondsInput.getText().toString().equals("") && !scoreInput.getText().toString().equals("")) {
                     playtimeTotalHours = Float.valueOf(hoursInput.getText().toString()) + Float.valueOf((Float.valueOf(minutesInput.getText().toString())/60)) + Float.valueOf(((Float.valueOf(secondsInput.getText().toString())/60)/60));
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("nameInput", nameInput.getText().toString());
