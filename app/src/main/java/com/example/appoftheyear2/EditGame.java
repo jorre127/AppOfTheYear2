@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.vivekkaushik.datepicker.DatePickerTimeline;
+import com.vivekkaushik.datepicker.OnDateSelectedListener;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -30,7 +32,7 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
     public Button editGameButton;
     public EditText nameInput;
     public EditText genreInput;
-    public EditText dateInput;
+    public String dateInput;
     public EditText scoreInput;
     private String genreSelection = "";
     private String statusSelection = "";
@@ -69,7 +71,6 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
         scoreInput = findViewById(R.id.ScoreEdit);
         genreInnput = findViewById(R.id.spinner);
         statusInput = findViewById(R.id.statusSpinner);
-        dateInput = findViewById(R.id.dateEdit);
         hoursInput = findViewById(R.id.timeplayHourEdit);
         minutesInput = findViewById(R.id.timeplayMinutesEdit);
         secondsInput = findViewById(R.id.timeplaySecondsEdit);
@@ -85,6 +86,28 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
         intent = getIntent();
         nameInput.setText(intent.getStringExtra("currentGameName"));
         genreSelection = (intent.getStringExtra("currentGameGenre"));
+
+
+        final DatePickerTimeline datePickerTimeline = findViewById(R.id.dateEdit);
+
+        String[] array = new String[3];
+        String stringDate = intent.getStringExtra("Date");
+        array = stringDate.split("/");
+
+        datePickerTimeline.setInitialDate(Integer.valueOf(array[2]), Integer.valueOf(array[1]), Integer.valueOf(array[0]));
+        datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int year, int month, int day, int dayOfWeek) {
+                dateInput =Integer.toString(day)+"/"+String.valueOf(month)+"/"+String.valueOf(year);
+            }
+
+            @Override
+            public void onDisabledDateSelected(int year, int month, int day, int dayOfWeek, boolean isDisabled) {
+                // Do Something
+            }
+        });
+
+
         for (int i = 0;i<genreOptions.length;i++){
 
             if(genreSelection.equals(genreOptions[i])){
@@ -147,6 +170,7 @@ public class EditGame extends AppCompatActivity implements AdapterView.OnItemSel
                     game.Score = Integer.parseInt(scoreInput.getText().toString());
                     game.Status = statusSelection;
                     game.HoursPlayed = playtimeTotalHours;
+                    game.GameDate = dateInput;
 
                     gameAdapter.notifyDataSetChanged();
 

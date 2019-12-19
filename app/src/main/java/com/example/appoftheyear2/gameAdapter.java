@@ -136,6 +136,7 @@ public class gameAdapter extends RecyclerView.Adapter<gameAdapter.gameViewHolder
                         intent.putExtra("currentGameScore", currentGame.getScore());
                         intent.putExtra("currentGamePosition", gameList.indexOf(currentGame));
                         intent.putExtra("timePlayed",currentGame.HoursPlayed);
+                        intent.putExtra("Date",currentGame.GameDate);
                         ((Activity)context).startActivityForResult(intent, 1);
 
                     }

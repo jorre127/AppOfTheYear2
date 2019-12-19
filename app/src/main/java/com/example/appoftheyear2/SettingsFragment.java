@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
@@ -34,6 +36,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 public class SettingsFragment extends Fragment {
 
     public static DayNightSwitch dayNightSwitch;
+    public Switch notificationSwitch;
     View background_view;
 
     public static boolean recreate = false;
@@ -52,6 +55,7 @@ public class SettingsFragment extends Fragment {
 
         dayNightSwitch = view.findViewById(R.id.darkmode_switch);
         background_view = view.findViewById(R.id.background_view);
+        notificationSwitch = view.findViewById(R.id.notificationsSwitch);
 
         if(MainActivity.Darkmode == true){
             dayNightSwitch.setIsNight(true);
@@ -78,6 +82,18 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    MainActivity.notificationSetting = true;
+                }
+                else{
+                    MainActivity.notificationSetting = false;
+                }
+            }
+        });
+
 
         // Button for accent color picker
         button = view.findViewById(R.id.btnChoose);

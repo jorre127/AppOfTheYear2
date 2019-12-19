@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int NOTIFICATION_ID = 0;
     public SettingsFragment settingsFragment;
     public static boolean json;
-    public boolean notificationSetting = true;
+    public static boolean notificationSetting = true;
     public ArrayList<Game> gameList;
     public static boolean Darkmode;
     private DrawerLayout drawer;
