@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NotificationReceiver mReceiver = new NotificationReceiver();
     public String gameName;
     Calendar c = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
     String getCurrentDateTime = sdf.format(c.getTime());
 
 

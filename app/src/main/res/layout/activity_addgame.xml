@@ -42,16 +42,16 @@
         app:layout_constraintStart_toEndOf="@+id/GametimeText_Add"
         app:layout_constraintTop_toBottomOf="@+id/ScoreEdit_Add" />
 
-    <EditText
+
+    <com.vivekkaushik.datepicker.DatePickerTimeline
         android:id="@+id/dateEdit_Add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:inputType="date"
-        android:textColor="?attr/textcolor"
-        app:layout_constraintStart_toEndOf="@+id/dateText_Add"
-        app:layout_constraintTop_toBottomOf="@+id/statusSpinner_Add" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateText_Add" />
 
     <TextView
         android:id="@+id/GameNameText_Add"
@@ -106,16 +106,6 @@
         android:textColor="?attr/textcolor"
         app:layout_constraintStart_toEndOf="@+id/scoreText_Add"
         app:layout_constraintTop_toBottomOf="@+id/spinner_Add" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="484dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/scoreText_Add"
@@ -175,11 +165,12 @@
         android:id="@+id/dateText_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="76dp"
         android:ems="8"
         android:text="Release Date:"
         android:textColor="?attr/textcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusText_Add" />
 

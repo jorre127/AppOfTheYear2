@@ -12,20 +12,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.appoftheyear2.R;
+import com.vivekkaushik.datepicker.DatePickerTimeline;
+import com.vivekkaushik.datepicker.OnDateSelectedListener;
 
 import java.lang.reflect.Array;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Addgame extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button addGameButon;
     private EditText nameInput;
     private EditText scoreInput;
-    private EditText dateInput;
+    private String dateInput;
     private Spinner genreInnput;
     private String genreSelection = "";
     private String statusSelection = "";
@@ -51,13 +56,29 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
 
         setContentView(R.layout.activity_addgame);
 
+        final DatePickerTimeline datePickerTimeline = findViewById(R.id.dateEdit_Add);
+        datePickerTimeline.setInitialDate(2019, 3, 21);
+        datePickerTimeline.setOnDateSelectedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int year, int month, int day, int dayOfWeek) {
+                dateInput =Integer.toString(day)+"/"+String.valueOf(month)+"/"+String.valueOf(year);
+            }
+
+            @Override
+            public void onDisabledDateSelected(int year, int month, int day, int dayOfWeek, boolean isDisabled) {
+                // Do Something
+            }
+        });
+
+        Date[] dates = {Calendar.getInstance().getTime()};
+        datePickerTimeline.deactivateDates(dates);
+
 
         addGameButon = findViewById(R.id.addGameButton_Add);
         nameInput = findViewById(R.id.editGameName_Add);
         scoreInput = findViewById(R.id.ScoreEdit_Add);
         genreInnput = findViewById(R.id.spinner_Add);
         statusInput = findViewById(R.id.statusSpinner_Add);
-        dateInput = findViewById(R.id.dateEdit_Add);
         hoursInput = findViewById(R.id.timeplayHourEdit_Add);
         minutesInput = findViewById(R.id.timeplayMinutesEdit_Add);
         secondsInput = findViewById(R.id.timeplaySecondsEdit_Add);
@@ -88,7 +109,7 @@ public class Addgame extends AppCompatActivity implements AdapterView.OnItemSele
                     returnIntent.putExtra("scoreInput", scoreInput.getText().toString());
                     returnIntent.putExtra("statusInput", statusSelection);
                     returnIntent.putExtra("hoursPlayed", playtimeTotalHours);
-                    returnIntent.putExtra("releaseDate", dateInput.getText().toString());
+                    returnIntent.putExtra("releaseDate", dateInput);
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
                 }
